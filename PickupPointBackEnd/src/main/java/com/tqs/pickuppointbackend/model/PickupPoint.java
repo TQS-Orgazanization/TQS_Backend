@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Getter
@@ -11,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "pickup_point")
 public class PickupPoint {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "point_id")
@@ -30,6 +34,7 @@ public class PickupPoint {
 
     // Relationships
     // One-to-Many relationship with PickupSchedule
+    @JsonIgnore
     @OneToMany(mappedBy = "pickupPoint", cascade = CascadeType.ALL)
     private List<PickupSchedule> pickupSchedules;
 }

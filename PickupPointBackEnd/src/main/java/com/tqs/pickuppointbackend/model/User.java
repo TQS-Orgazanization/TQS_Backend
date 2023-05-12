@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Getter
@@ -32,6 +35,7 @@ public class User {
 
     // Relationships
     // One-to-Many relationship with PickupSchedule
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<PickupSchedule> pickupSchedules;
 }

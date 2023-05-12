@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Getter
 @Setter
 @Entity
@@ -28,10 +30,12 @@ public class PickupSchedule {
     // Many-to-One relationship with PickupPoint
     // Many-to-One relationship with User
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "point_id")
     private PickupPoint pickupPoint;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
