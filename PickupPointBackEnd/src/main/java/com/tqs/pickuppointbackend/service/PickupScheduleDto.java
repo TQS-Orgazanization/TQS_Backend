@@ -9,6 +9,6 @@ public class PickupScheduleDto {
     private Long pickupPointId;
     private Long userId;
     private Long code;
-    private Long startTime;
-    private Long endTime;
+    private String startTime;
+    private String endTime;
 }

@@ -2,6 +2,7 @@ package com.tqs.pickuppointbackend.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.sql.Date;
 
 import javax.persistence.*;
 
@@ -21,10 +22,10 @@ public class PickupSchedule {
     private Long code;
 
     @Column(name = "start_time")
-    private Long startTime;
+    private Date startTime;
 
     @Column(name = "end_time")
-    private Long endTime;
+    private Date endTime;
 
     // Relationships
     // Many-to-One relationship with PickupPoint

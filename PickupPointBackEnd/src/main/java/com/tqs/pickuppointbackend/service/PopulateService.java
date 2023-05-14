@@ -27,7 +27,7 @@ public class PopulateService {
 
     public void populateDatabase() {
         // Create sample PickupPoints
-        PickupPoint pickupPoint1 = new PickupPoint();
+        /*PickupPoint pickupPoint1 = new PickupPoint();
         pickupPoint1.setName("Pickup Point 1");
         pickupPoint1.setAddress("Address 1");
         pickupPoint1.setAvailability(true);
@@ -72,5 +72,6 @@ public class PopulateService {
         pickupSchedule2.setEndTime(new Date().getTime() + 7L * 24 * 60 * 60 * 1000);  // add 1 week
         pickupSchedule1.setCode(00000L);
         pickupScheduleRepository.save(pickupSchedule2);
+        */
     }
 }
