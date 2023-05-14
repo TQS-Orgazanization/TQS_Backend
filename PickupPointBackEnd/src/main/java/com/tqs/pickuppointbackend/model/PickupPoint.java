@@ -2,6 +2,8 @@ package com.tqs.pickuppointbackend.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "pickup_point")
 public class PickupPoint {
