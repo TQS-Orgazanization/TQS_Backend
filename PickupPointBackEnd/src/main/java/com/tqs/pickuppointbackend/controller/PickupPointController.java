@@ -60,4 +60,5 @@ public class PickupPointController {
         return ResponseEntity.ok().body(pickupPointService.deletePickupPointById(id));
     
     }
+    
 }
