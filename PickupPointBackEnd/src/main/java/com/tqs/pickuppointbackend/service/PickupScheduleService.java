@@ -42,9 +42,10 @@ public class PickupScheduleService {
         return pickupScheduleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
     }
 
-    public PickupSchedule addPickupSchedule(PickupScheduleDto pickupScheduleDto) throws ResourceNotFoundException{
+    public PickupSchedule addPickupSchedule(PickupSchedule pickupSchedule) throws ResourceNotFoundException{
 
-        try {
+        return pickupScheduleRepository.save(pickupSchedule);
+        /*try {
 
             Long pickupPointId = pickupScheduleDto.getPickupPointId();
             Long userId = pickupScheduleDto.getUserId();
@@ -73,8 +74,16 @@ public class PickupScheduleService {
         }
 
         throw new ResourceNotFoundException("Pickup Point Not Found!");
-
+        */
         
+    }
+
+    public PickupSchedule deletePickupScheduleById(long id) throws ResourceNotFoundException {
+        PickupSchedule pickupSchedule = pickupScheduleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
+        
+        pickupScheduleRepository.deleteById(id);
+
+        return pickupSchedule;
         
     }
 }
