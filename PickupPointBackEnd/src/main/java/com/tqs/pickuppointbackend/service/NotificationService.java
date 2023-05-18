@@ -25,4 +25,13 @@ public class NotificationService {
     
     }
 
+    public Notification deleteNotificationById(long id) throws ResourceNotFoundException {
+        Notification notification = notificationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Notification Not Found!"));
+        
+        notificationRepository.deleteById(id);
+
+        return notification;
+        
+    }
 }
+
