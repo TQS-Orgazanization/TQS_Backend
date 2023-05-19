@@ -35,4 +35,10 @@ jobs:
       run: |
           cd PickupPointBackEnd
           mvn clean install
+    - name: Build and Analyze
+      env:
+        SONAR_TOKEN: sqp_7f9a0c026c5a6a2a3d45f59271d8904eddbbe26e
+      run: |
+        cd PickupPointBackEnd
+        mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=TQS_Backend
 
