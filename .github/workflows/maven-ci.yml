@@ -26,3 +26,6 @@ jobs:
       run: |
           cd PickupPointBackEnd
           mvn clean install
+          
+    - name: Run Spring Boot application
+      run: mvn spring-boot:run -DskipTests
