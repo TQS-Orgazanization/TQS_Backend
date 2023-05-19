@@ -15,7 +15,10 @@
     <description>PickupPointBackEnd</description>
     <properties>
         <java.version>17</java.version>
+        <sonar.organization>tqs-orgazanization</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
+  
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -90,6 +93,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
+        
 
     </dependencies>
 
@@ -107,6 +111,11 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.7.0.1746</version>
+      </plugin>
         </plugins>
     </build>
 
