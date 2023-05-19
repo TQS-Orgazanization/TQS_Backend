@@ -9,6 +9,14 @@ jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0.33
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: pickuppoint
+        ports:
+          - 3306:3306
     steps:
       - uses: actions/checkout@v3
         with:
