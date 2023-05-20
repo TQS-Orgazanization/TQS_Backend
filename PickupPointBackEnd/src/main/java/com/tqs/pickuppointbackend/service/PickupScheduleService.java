@@ -11,10 +11,12 @@ import com.tqs.pickuppointbackend.exceptions.ResourceNotFoundException;
 import com.tqs.pickuppointbackend.model.PickupPoint;
 import com.tqs.pickuppointbackend.model.PickupSchedule;
 import com.tqs.pickuppointbackend.model.User;
+import com.tqs.pickuppointbackend.model.Dto.PickupScheduleDTO;
 import com.tqs.pickuppointbackend.repository.PickupPointRepository;
 import com.tqs.pickuppointbackend.repository.PickupScheduleRepository;
 import com.tqs.pickuppointbackend.repository.UserRepository;
-import com.tqs.pickuppointbackend.service.PickupScheduleDto;
+
+import io.github.classgraph.Resource;
 
 import java.sql.Date;
 
@@ -42,8 +44,9 @@ public class PickupScheduleService {
         return pickupScheduleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
     }
 
-    public PickupSchedule addPickupSchedule(PickupSchedule pickupSchedule) throws ResourceNotFoundException{
+    public PickupSchedule addPickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException{
 
+        PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
         return pickupScheduleRepository.save(pickupSchedule);
         /*try {
 
@@ -85,5 +88,27 @@ public class PickupScheduleService {
 
         return pickupSchedule;
         
+    }
+
+    public PickupSchedule pickupScheduleFromDTO(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
+
+        PickupSchedule pickupSchedule = new PickupSchedule();
+        pickupSchedule.setCode(pickupScheduleDTO.getCode());
+        pickupSchedule.setStartTime(pickupScheduleDTO.getStartTime());
+        pickupSchedule.setEndTime(pickupScheduleDTO.getEndTime());
+
+        PickupPoint pickupPoint = pickupPointRepository.findById(pickupScheduleDTO.getPickupPointId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
+        User user = userRepository.findById(pickupScheduleDTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User Not Found!"));
+
+        pickupSchedule.setPickupPoint(pickupPoint);
+        pickupSchedule.setUser(user);
+
+
+        /*if(pickupScheduleDTO.getId() != null) {
+            pickupSchedule.setId(pickupScheduleDTO.getId());
+        }*/
+
+        return pickupSchedule;
+
     }
 }

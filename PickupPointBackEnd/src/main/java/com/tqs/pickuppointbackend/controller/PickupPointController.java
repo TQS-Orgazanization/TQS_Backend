@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tqs.pickuppointbackend.exceptions.ResourceNotFoundException;
 import com.tqs.pickuppointbackend.model.PickupPoint;
+import com.tqs.pickuppointbackend.model.Dto.PickupPointDTO;
 import com.tqs.pickuppointbackend.service.PickupPointService;
 
 @RestController
@@ -43,15 +44,15 @@ public class PickupPointController {
     }
 
     @PostMapping("/pickuppoint")
-    public ResponseEntity<PickupPoint> addPickupPoint(@Valid @RequestBody PickupPoint pickupPoint) throws ResourceNotFoundException {
+    public ResponseEntity<PickupPoint> addPickupPoint(@Valid @RequestBody PickupPointDTO pickupPointDTO) throws ResourceNotFoundException {
 
-        return ResponseEntity.ok().body(pickupPointService.addPickupPoint(pickupPoint));
+        return ResponseEntity.ok().body(pickupPointService.addPickupPoint(pickupPointDTO));
 
     }
 
     @PutMapping("/pickuppoint/{id}")
-    public ResponseEntity<PickupPoint> updatePickupPoint(@PathVariable(value = "id") Long id, @Valid @RequestBody PickupPoint pickupPointDetails) throws ResourceNotFoundException {
-        return ResponseEntity.ok(pickupPointService.updatePickupPoint(pickupPointDetails));
+    public ResponseEntity<PickupPoint> updatePickupPoint(@PathVariable(value = "id") Long id, @Valid @RequestBody PickupPointDTO pickupPointDTO) throws ResourceNotFoundException {
+        return ResponseEntity.ok(pickupPointService.updatePickupPoint(pickupPointDTO));
     }
 
     @DeleteMapping("/pickuppoint/{id}")

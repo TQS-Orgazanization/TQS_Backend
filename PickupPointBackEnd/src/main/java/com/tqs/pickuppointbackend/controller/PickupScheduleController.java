@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tqs.pickuppointbackend.exceptions.ResourceNotFoundException;
 import com.tqs.pickuppointbackend.model.PickupSchedule;
-import com.tqs.pickuppointbackend.service.PickupScheduleDto;
+import com.tqs.pickuppointbackend.model.Dto.PickupScheduleDTO;
 import com.tqs.pickuppointbackend.service.PickupScheduleService;
 
 @RestController
@@ -43,9 +43,9 @@ public class PickupScheduleController {
     }
 
     @PostMapping("/pickupschedule")
-    public ResponseEntity<PickupSchedule> addPickupSchedule(@RequestBody PickupSchedule pickupSchedule) throws ResourceNotFoundException {
+    public ResponseEntity<PickupSchedule> addPickupSchedule(@RequestBody PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
 
-        return ResponseEntity.ok().body(pickupScheduleService.addPickupSchedule(pickupSchedule));
+        return ResponseEntity.ok().body(pickupScheduleService.addPickupSchedule(pickupScheduleDTO));
     
     }
 

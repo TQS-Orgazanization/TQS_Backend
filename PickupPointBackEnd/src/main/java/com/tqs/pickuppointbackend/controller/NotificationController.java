@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tqs.pickuppointbackend.exceptions.ResourceNotFoundException;
 import com.tqs.pickuppointbackend.model.Notification;
+import com.tqs.pickuppointbackend.model.Dto.NotificationDTO;
 import com.tqs.pickuppointbackend.service.NotificationService;
 
 @RestController
@@ -32,9 +33,9 @@ public class NotificationController {
     }
     
     @PostMapping("/notification")
-    public ResponseEntity<Notification> addNotfication(@Valid @RequestBody Notification notification) throws ResourceNotFoundException {
+    public ResponseEntity<Notification> addNotfication(@Valid @RequestBody NotificationDTO notificationDTO) throws ResourceNotFoundException {
 
-        return ResponseEntity.ok().body(notificationService.addNotification(notification));
+        return ResponseEntity.ok().body(notificationService.addNotification(notificationDTO));
 
     }
 

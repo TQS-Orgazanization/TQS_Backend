@@ -1,5 +1,6 @@
 package com.tqs.pickuppointbackend.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.tqs.pickuppointbackend.exceptions.ResourceNotFoundException;
 import com.tqs.pickuppointbackend.model.PickupPoint;
+import com.tqs.pickuppointbackend.model.PickupSchedule;
+import com.tqs.pickuppointbackend.model.Dto.PickupPointDTO;
 import com.tqs.pickuppointbackend.repository.PickupPointRepository;
 
 @Service
@@ -23,11 +26,18 @@ public class PickupPointService {
         return pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
     }
 
-    public PickupPoint addPickupPoint(PickupPoint pickupPoint) {
+    public PickupPoint addPickupPoint(PickupPointDTO pickupPointDTO) {
+
+        PickupPoint pickupPoint = pickupPointFromDTO(pickupPointDTO);
+        pickupPoint.setPickupSchedules(new ArrayList<PickupSchedule>());
+
         return pickupPointRepository.save(pickupPoint);
     }
 
-    public PickupPoint updatePickupPoint(PickupPoint pickupPoint) throws ResourceNotFoundException {
+    public PickupPoint updatePickupPoint(PickupPointDTO pickupPointDTO) throws ResourceNotFoundException {
+
+        PickupPoint pickupPoint = pickupPointFromDTO(pickupPointDTO);
+
         PickupPoint existingPickupPoint = pickupPointRepository.findById(pickupPoint.getPoint_id()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
         
         if (existingPickupPoint == null){ return null; }
@@ -48,4 +58,21 @@ public class PickupPointService {
         return pickupPoint;
         
     }
+
+    public PickupPoint pickupPointFromDTO(PickupPointDTO pickupPointDTO) {
+
+        PickupPoint pickupPoint = new PickupPoint();
+        pickupPoint.setName(pickupPointDTO.getName());
+        pickupPoint.setAddress(pickupPointDTO.getAddress());
+        pickupPoint.setContactInfo(pickupPointDTO.getContactInfo());
+        pickupPoint.setAvailability(pickupPointDTO.isAvailability());
+
+        if(pickupPointDTO.getPointId() != null) {
+            pickupPoint.setPoint_id(pickupPointDTO.getPointId());
+        }
+
+        return pickupPoint;
+
+    }
+
 }
