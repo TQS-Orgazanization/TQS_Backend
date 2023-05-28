@@ -6,8 +6,6 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Getter
 @Setter
 @Entity
@@ -26,6 +24,9 @@ public class PickupSchedule {
 
     @Column(name = "end_time")
     private Date endTime;
+
+    @Column(name = "availabity")
+    private Boolean availabilty;
 
     // Relationships
     // Many-to-One relationship with PickupPoint
