@@ -1,6 +1,5 @@
 package com.tqs.pickuppointbackend.service;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -15,11 +14,6 @@ import com.tqs.pickuppointbackend.model.Dto.PickupScheduleDTO;
 import com.tqs.pickuppointbackend.repository.PickupPointRepository;
 import com.tqs.pickuppointbackend.repository.PickupScheduleRepository;
 import com.tqs.pickuppointbackend.repository.UserRepository;
-
-import io.github.classgraph.Resource;
-
-import java.sql.Date;
-
 
 
 @Service
@@ -48,36 +42,6 @@ public class PickupScheduleService {
 
         PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
         return pickupScheduleRepository.save(pickupSchedule);
-        /*try {
-
-            Long pickupPointId = pickupScheduleDto.getPickupPointId();
-            Long userId = pickupScheduleDto.getUserId();
-            Long code = pickupScheduleDto.getCode();
-            Date start_time = new Date(dateFormat.parse(pickupScheduleDto.getStartTime()).getTime());
-            Date end_time = new Date(dateFormat.parse(pickupScheduleDto.getEndTime()).getTime());
-
-            // Retrieve the PickupPoint and User objects from the database using the IDs
-            PickupPoint pickupPoint = pickupPointRepository.findById(pickupPointId).orElseThrow(() -> new ResourceNotFoundException("Pickup Point not found"));
-            User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
-
-
-            PickupSchedule pickupSchedule = new PickupSchedule();
-            pickupSchedule.setPickupPoint(pickupPoint);
-            pickupSchedule.setUser(user);
-            pickupSchedule.setCode(code);
-            pickupSchedule.setStartTime(start_time);
-            pickupSchedule.setEndTime(end_time);
-
-
-            return pickupScheduleRepository.save(pickupSchedule);
-
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        throw new ResourceNotFoundException("Pickup Point Not Found!");
-        */
         
     }
 
@@ -96,6 +60,8 @@ public class PickupScheduleService {
         pickupSchedule.setCode(pickupScheduleDTO.getCode());
         pickupSchedule.setStartTime(pickupScheduleDTO.getStartTime());
         pickupSchedule.setEndTime(pickupScheduleDTO.getEndTime());
+        pickupSchedule.setAvailabilty(pickupScheduleDTO.getAvailability());
+
 
         PickupPoint pickupPoint = pickupPointRepository.findById(pickupScheduleDTO.getPickupPointId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
         User user = userRepository.findById(pickupScheduleDTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User Not Found!"));
