@@ -30,6 +30,10 @@ public class PickupPointService {
         return pickupPointRepository.findByAvailability(true);
     }
 
+    public List<PickupPoint> getNonAvailablePickupPoints() throws ResourceNotFoundException {
+        return pickupPointRepository.findByAvailability(false);
+    }
+
     public PickupPoint addPickupPoint(PickupPointDTO pickupPointDTO) {
 
         PickupPoint pickupPoint = pickupPointFromDTO(pickupPointDTO);
