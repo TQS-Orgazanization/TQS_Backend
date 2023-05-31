@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
@@ -31,7 +30,14 @@ public class User {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "password")
+    private String password;
+
     // Getters and setters
+
+    public String getPassword() {
+        return password;
+    }
 
     // Relationships
     // One-to-Many relationship with PickupSchedule
