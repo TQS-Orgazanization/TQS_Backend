@@ -45,6 +45,22 @@ public class PickupScheduleService {
         
     }
 
+    public PickupSchedule updatePickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
+
+        PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
+
+        PickupSchedule existingPickupSchedule = pickupScheduleRepository.findById(pickupSchedule.getId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
+        
+        if (existingPickupSchedule == null){ return null; }
+
+        existingPickupSchedule.setCode(pickupSchedule.getCode());
+        existingPickupSchedule.setStartTime(pickupSchedule.getStartTime());
+        existingPickupSchedule.setEndTime(pickupSchedule.getEndTime());
+        existingPickupSchedule.setAvailabilty(pickupSchedule.getAvailabilty());
+        
+        return pickupScheduleRepository.save(existingPickupSchedule);
+    }
+
     public PickupSchedule deletePickupScheduleById(long id) throws ResourceNotFoundException {
         PickupSchedule pickupSchedule = pickupScheduleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
         
