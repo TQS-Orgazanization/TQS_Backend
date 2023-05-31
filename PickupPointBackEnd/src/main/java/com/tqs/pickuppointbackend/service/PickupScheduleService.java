@@ -2,6 +2,7 @@ package com.tqs.pickuppointbackend.service;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,10 @@ public class PickupScheduleService {
     public PickupSchedule addPickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException{
 
         PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
+        
+        String code = generateRandomCode();
+        pickupSchedule.setCode(Long.parseLong(code));
+
         return pickupScheduleRepository.save(pickupSchedule);
         
     }
@@ -54,8 +59,6 @@ public class PickupScheduleService {
         if (existingPickupSchedule == null){ return null; }
 
         existingPickupSchedule.setCode(pickupSchedule.getCode());
-        existingPickupSchedule.setStartTime(pickupSchedule.getStartTime());
-        existingPickupSchedule.setEndTime(pickupSchedule.getEndTime());
         existingPickupSchedule.setAvailabilty(pickupSchedule.getAvailabilty());
         
         return pickupScheduleRepository.save(existingPickupSchedule);
@@ -74,8 +77,6 @@ public class PickupScheduleService {
 
         PickupSchedule pickupSchedule = new PickupSchedule();
         pickupSchedule.setCode(pickupScheduleDTO.getCode());
-        pickupSchedule.setStartTime(pickupScheduleDTO.getStartTime());
-        pickupSchedule.setEndTime(pickupScheduleDTO.getEndTime());
         pickupSchedule.setAvailabilty(pickupScheduleDTO.getAvailability());
 
 
@@ -93,4 +94,12 @@ public class PickupScheduleService {
         return pickupSchedule;
 
     }
+
+
+    public static String generateRandomCode() {
+        Random random = new Random();
+        int code = random.nextInt(900000) + 100000; // Generates a random number between 100000 and 999999
+        return String.valueOf(code);
+    }
+
 }

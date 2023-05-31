@@ -19,12 +19,6 @@ public class PickupSchedule {
     @Column(name = "code")
     private Long code;
 
-    @Column(name = "start_time")
-    private Date startTime;
-
-    @Column(name = "end_time")
-    private Date endTime;
-
     @Column(name = "availabity")
     private Boolean availabilty;
 
