@@ -43,6 +43,13 @@ public class PickupPointController {
 
     }
 
+    @GetMapping("/pickuppoints/available")
+    public ResponseEntity<List<PickupPoint>> getPickupPointById() throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupPointService.getAvailablePickupPoints());
+
+    }
+
     @PostMapping("/pickuppoint")
     public ResponseEntity<PickupPoint> addPickupPoint(@Valid @RequestBody PickupPointDTO pickupPointDTO) throws ResourceNotFoundException {
 

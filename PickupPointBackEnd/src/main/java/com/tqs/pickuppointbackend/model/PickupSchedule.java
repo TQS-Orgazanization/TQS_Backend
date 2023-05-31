@@ -19,8 +19,8 @@ public class PickupSchedule {
     @Column(name = "code")
     private Long code;
 
-    @Column(name = "availabity")
-    private Boolean availabilty;
+    @Column(name = "availability")
+    private Boolean availability;
 
     // Relationships
     // Many-to-One relationship with PickupPoint

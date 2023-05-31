@@ -50,6 +50,10 @@ public class PickupScheduleService {
         
     }
 
+    public List<PickupSchedule> getAvailablePickupSchedules() throws ResourceNotFoundException {
+        return pickupScheduleRepository.findByAvailability(false);
+    }
+
     public PickupSchedule updatePickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
 
         PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
@@ -59,7 +63,7 @@ public class PickupScheduleService {
         if (existingPickupSchedule == null){ return null; }
 
         existingPickupSchedule.setCode(pickupSchedule.getCode());
-        existingPickupSchedule.setAvailabilty(pickupSchedule.getAvailabilty());
+        existingPickupSchedule.setAvailabilty(pickupSchedule.getAvailability());
         
         return pickupScheduleRepository.save(existingPickupSchedule);
     }
@@ -77,7 +81,7 @@ public class PickupScheduleService {
 
         PickupSchedule pickupSchedule = new PickupSchedule();
         pickupSchedule.setCode(pickupScheduleDTO.getCode());
-        pickupSchedule.setAvailabilty(pickupScheduleDTO.getAvailability());
+        pickupSchedule.setAvailability(pickupScheduleDTO.getAvailability());
 
 
         PickupPoint pickupPoint = pickupPointRepository.findById(pickupScheduleDTO.getPickupPointId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
