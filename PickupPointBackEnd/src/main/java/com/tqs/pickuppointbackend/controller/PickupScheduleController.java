@@ -57,6 +57,13 @@ public class PickupScheduleController {
 
     }
 
+    @GetMapping("/pickupschedules/nonavailable")
+    public ResponseEntity<List<PickupSchedule>> getPickupScheduleByNonAvailabilty() throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupScheduleService.getNonAvailablePickupSchedules());
+
+    }
+
     @PutMapping("/pickupschedule/{id}")
     public ResponseEntity<PickupSchedule> updatePickupSchedule(@PathVariable(value = "id") Long id, @Valid @RequestBody PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
         return ResponseEntity.ok(pickupScheduleService.updatePickupSchedule(pickupScheduleDTO));

@@ -54,6 +54,10 @@ public class PickupScheduleService {
         return pickupScheduleRepository.findByAvailability(false);
     }
 
+    public List<PickupSchedule> getNonAvailablePickupSchedules() throws ResourceNotFoundException {
+        return pickupScheduleRepository.findByAvailability(true);
+    }
+
     public PickupSchedule updatePickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
 
         PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
