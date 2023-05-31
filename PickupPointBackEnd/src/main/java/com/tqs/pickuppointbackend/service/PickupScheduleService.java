@@ -67,7 +67,7 @@ public class PickupScheduleService {
         if (existingPickupSchedule == null){ return null; }
 
         existingPickupSchedule.setCode(pickupSchedule.getCode());
-        existingPickupSchedule.setAvailabilty(pickupSchedule.getAvailability());
+        existingPickupSchedule.setAvailability(pickupSchedule.getAvailability());
         
         return pickupScheduleRepository.save(existingPickupSchedule);
     }
