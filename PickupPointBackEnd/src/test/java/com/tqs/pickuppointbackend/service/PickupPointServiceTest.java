@@ -87,17 +87,17 @@ public class PickupPointServiceTest {
     @Test
     public void testUpdatePickupPoint() throws ResourceNotFoundException {
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
-        pickupPointDTO.setPointId(1L);
+        pickupPointDTO.setPoint_id(1L);
         pickupPointDTO.setName("Updated Pickup Point");
 
         PickupPoint pickupPoint = new PickupPoint();
-        pickupPoint.setId(pickupPointDTO.getPointId());
+        pickupPoint.setId(pickupPointDTO.getPoint_id());
         pickupPoint.setName(pickupPointDTO.getName());
 
         PickupPoint existingPickupPoint = new PickupPoint();
-        existingPickupPoint.setId(pickupPointDTO.getPointId());
+        existingPickupPoint.setId(pickupPointDTO.getPoint_id());
 
-        when(pickupPointRepository.findById(pickupPointDTO.getPointId())).thenReturn(Optional.of(existingPickupPoint));
+        when(pickupPointRepository.findById(pickupPointDTO.getPoint_id())).thenReturn(Optional.of(existingPickupPoint));
         when(pickupPointRepository.save(any(PickupPoint.class))).thenReturn(pickupPoint);
 
         PickupPoint result = pickupPointService.updatePickupPoint(pickupPointDTO);
@@ -108,10 +108,10 @@ public class PickupPointServiceTest {
     @Test
     public void testUpdatePickupPoint_NotFound() {
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
-        pickupPointDTO.setPointId(1L);
+        pickupPointDTO.setPoint_id(1L);
         pickupPointDTO.setName("Updated Pickup Point");
 
-        when(pickupPointRepository.findById(pickupPointDTO.getPointId())).thenReturn(Optional.empty());
+        when(pickupPointRepository.findById(pickupPointDTO.getPoint_id())).thenReturn(Optional.empty());
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             pickupPointService.updatePickupPoint(pickupPointDTO);

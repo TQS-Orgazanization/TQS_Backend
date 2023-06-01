@@ -23,7 +23,7 @@ public class PickupPointDTOTest {
 
         PickupPointDTO pickupPointDTO = new PickupPointDTO(pointId, name, address, availability, contactInfo, pickupSchedules);
 
-        assertEquals(pointId, pickupPointDTO.getPointId());
+        assertEquals(pointId, pickupPointDTO.getPoint_id());
         assertEquals(name, pickupPointDTO.getName());
         assertEquals(address, pickupPointDTO.getAddress());
         assertEquals(availability, pickupPointDTO.isAvailability());
@@ -35,7 +35,7 @@ public class PickupPointDTOTest {
     public void testPickupPointDTOClassWithEmptyConstructor() {
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
 
-        assertNull(pickupPointDTO.getPointId());
+        assertNull(pickupPointDTO.getPoint_id());
         assertNull(pickupPointDTO.getName());
         assertNull(pickupPointDTO.getAddress());
         assertFalse(pickupPointDTO.isAvailability());
@@ -54,14 +54,14 @@ public class PickupPointDTOTest {
 
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
 
-        pickupPointDTO.setPointId(pointId);
+        pickupPointDTO.setPoint_id(pointId);
         pickupPointDTO.setName(name);
         pickupPointDTO.setAddress(address);
         pickupPointDTO.setAvailability(availability);
         pickupPointDTO.setContactInfo(contactInfo);
         pickupPointDTO.setPickupSchedules(pickupSchedules);
 
-        assertEquals(pointId, pickupPointDTO.getPointId());
+        assertEquals(pointId, pickupPointDTO.getPoint_id());
         assertEquals(name, pickupPointDTO.getName());
         assertEquals(address, pickupPointDTO.getAddress());
         assertEquals(availability, pickupPointDTO.isAvailability());
