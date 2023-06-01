@@ -41,6 +41,6 @@ jobs:
 
           # Example: Deploy to a remote Ubuntu machine via SSH
           # Make sure to replace the placeholders with your actual values
-          ssh fantao@deti-tqs-08@ua.pt "mkdir -p /project"
-          scp target/PickupPointBackEnd-0.0.1-SNAPSHOT.jar fantao@deti-tqs-08@ua.pt:/project
-          ssh fantao@deti-tqs-08@ua.pt "sudo systemctl restart PickupPointBackEnd-0.0.1-SNAPSHOT"
+          ssh fantao@deti-tqs-08.ua.pt "mkdir -p /project"
+          scp target/PickupPointBackEnd-0.0.1-SNAPSHOT.jar fantao@deti-tqs-08.ua.pt:/project
+          ssh fantao@deti-tqs-08.ua.pt "sudo systemctl restart PickupPointBackEnd-0.0.1-SNAPSHOT"
