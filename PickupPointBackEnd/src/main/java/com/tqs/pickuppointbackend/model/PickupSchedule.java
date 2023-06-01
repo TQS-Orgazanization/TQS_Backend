@@ -33,4 +33,8 @@ public class PickupSchedule {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
+    }
 }

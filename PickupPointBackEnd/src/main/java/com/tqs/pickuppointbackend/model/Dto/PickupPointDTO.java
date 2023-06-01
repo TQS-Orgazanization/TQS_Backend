@@ -15,14 +15,15 @@ import java.util.List;
 @NoArgsConstructor
 public class PickupPointDTO {
 
-    private Long pointId;
+    private Long point_id;
     private String name;
     private String address;
     private boolean availability;
     private String contactInfo;
-
+    
     // Relationships
     private List<PickupScheduleDTO> pickupSchedules;
+    private Long user_id;
 
 
 

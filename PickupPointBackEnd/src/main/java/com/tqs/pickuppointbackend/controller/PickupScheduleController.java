@@ -3,6 +3,7 @@ package com.tqs.pickuppointbackend.controller;
 
 import lombok.extern.log4j.Log4j2;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -36,6 +37,13 @@ public class PickupScheduleController {
 
     }
 
+    @GetMapping("/pickupschedules/user/{id}")
+    public ResponseEntity<List<PickupSchedule>> getPickupSchedulesByuserId(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupScheduleService.getPickupScheduleUserById(id));
+
+    }
+
     @GetMapping("/pickupschedule/{id}")
     public ResponseEntity<PickupSchedule> getPickupScheduleById(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
 
@@ -44,7 +52,7 @@ public class PickupScheduleController {
     }
 
     @PostMapping("/pickupschedule")
-    public ResponseEntity<PickupSchedule> addPickupSchedule(@RequestBody PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
+    public ResponseEntity<PickupSchedule> addPickupSchedule(@RequestBody PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException, NoSuchAlgorithmException {
 
         return ResponseEntity.ok().body(pickupScheduleService.addPickupSchedule(pickupScheduleDTO));
     
@@ -54,6 +62,20 @@ public class PickupScheduleController {
     public ResponseEntity<List<PickupSchedule>> getPickupScheduleByAvailabilty() throws ResourceNotFoundException {
 
         return ResponseEntity.ok().body(pickupScheduleService.getAvailablePickupSchedules());
+
+    }
+
+    @GetMapping("/pickupschedules/available/{id}")
+    public ResponseEntity<List<PickupSchedule>> getPickupScheduleByAvailabiltyByPickupPointId(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupScheduleService.getAvailablePickupSchedulesByPickupPointId(id));
+
+    }
+
+    @GetMapping("/pickupschedules/nonavailable/{id}")
+    public ResponseEntity<List<PickupSchedule>> getPickupScheduleByNonAvailabiltyByPickupPointId(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupScheduleService.getNonAvailablePickupSchedulesByPickupPointId(id));
 
     }
 

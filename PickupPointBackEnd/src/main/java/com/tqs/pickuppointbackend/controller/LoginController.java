@@ -26,7 +26,7 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping
+    @PostMapping        
     public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) throws ResourceNotFoundException {
         // Check if user exists with the given email
 
