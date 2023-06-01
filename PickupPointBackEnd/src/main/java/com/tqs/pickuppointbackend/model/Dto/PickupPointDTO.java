@@ -20,9 +20,10 @@ public class PickupPointDTO {
     private String address;
     private boolean availability;
     private String contactInfo;
-
+    
     // Relationships
     private List<PickupScheduleDTO> pickupSchedules;
+    private Long user_id;
 
 
 

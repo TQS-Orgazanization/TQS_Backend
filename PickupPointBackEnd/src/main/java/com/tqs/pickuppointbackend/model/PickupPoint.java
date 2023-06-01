@@ -41,7 +41,10 @@ public class PickupPoint {
     @JsonIgnore
     @OneToMany(mappedBy = "pickupPoint", cascade = CascadeType.ALL)
     private List<PickupSchedule> pickupSchedules;
-    
+
+    @Column(name = "user_id")
+    private Long user_id;
+
     // Setter for id field
     public void setId(Long id) {
         this.point_id = id;

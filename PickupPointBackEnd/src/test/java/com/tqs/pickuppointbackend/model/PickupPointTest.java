@@ -18,7 +18,9 @@ public class PickupPointTest {
 
         List<PickupSchedule> pickupSchedules = new ArrayList<>();
 
-        PickupPoint pickupPoint = new PickupPoint(pointId, name, address, availability, contactInfo, pickupSchedules);
+        Long user_id = 1L;
+
+        PickupPoint pickupPoint = new PickupPoint(pointId, name, address, availability, contactInfo, pickupSchedules, user_id);
 
         assertEquals(pointId, pickupPoint.getPoint_id());
         assertEquals(name, pickupPoint.getName());

@@ -54,6 +54,7 @@ public class PickupPointService {
         existingPickupPoint.setAddress(pickupPoint.getAddress());
         existingPickupPoint.setContactInfo(pickupPoint.getContactInfo());
         existingPickupPoint.setAvailability(pickupPoint.isAvailability());
+        existingPickupPoint.setUser_id(pickupPoint.getUser_id());
         
         return pickupPointRepository.save(existingPickupPoint);
     }
@@ -74,6 +75,7 @@ public class PickupPointService {
         pickupPoint.setAddress(pickupPointDTO.getAddress());
         pickupPoint.setContactInfo(pickupPointDTO.getContactInfo());
         pickupPoint.setAvailability(pickupPointDTO.isAvailability());
+        pickupPoint.setUser_id(pickupPointDTO.getUser_id());
         System.out.print(pickupPointDTO.getPoint_id());
         if(pickupPointDTO.getPoint_id() != null) {
             pickupPoint.setPoint_id(pickupPointDTO.getPoint_id());

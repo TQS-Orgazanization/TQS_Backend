@@ -20,8 +20,9 @@ public class PickupPointDTOTest {
         boolean availability = true;
         String contactInfo = "Test Contact Info";
         List<PickupScheduleDTO> pickupSchedules = new ArrayList<>();
+        Long user_id = 1L;
 
-        PickupPointDTO pickupPointDTO = new PickupPointDTO(pointId, name, address, availability, contactInfo, pickupSchedules);
+        PickupPointDTO pickupPointDTO = new PickupPointDTO(pointId, name, address, availability, contactInfo, pickupSchedules, user_id);
 
         assertEquals(pointId, pickupPointDTO.getPoint_id());
         assertEquals(name, pickupPointDTO.getName());
@@ -51,7 +52,8 @@ public class PickupPointDTOTest {
         boolean availability = true;
         String contactInfo = "Test Contact Info";
         List<PickupScheduleDTO> pickupSchedules = new ArrayList<>();
-
+        Long user_id = 1L;
+    
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
 
         pickupPointDTO.setPoint_id(pointId);
@@ -60,6 +62,8 @@ public class PickupPointDTOTest {
         pickupPointDTO.setAvailability(availability);
         pickupPointDTO.setContactInfo(contactInfo);
         pickupPointDTO.setPickupSchedules(pickupSchedules);
+        pickupPointDTO.setUser_id(user_id);
+
 
         assertEquals(pointId, pickupPointDTO.getPoint_id());
         assertEquals(name, pickupPointDTO.getName());
@@ -67,5 +71,6 @@ public class PickupPointDTOTest {
         assertEquals(availability, pickupPointDTO.isAvailability());
         assertEquals(contactInfo, pickupPointDTO.getContactInfo());
         assertEquals(pickupSchedules, pickupPointDTO.getPickupSchedules());
+        assertEquals(user_id, pickupPointDTO.getUser_id());
     }
 }
