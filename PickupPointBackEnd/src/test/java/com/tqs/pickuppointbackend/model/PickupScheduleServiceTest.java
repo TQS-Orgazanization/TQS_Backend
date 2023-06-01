@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,7 +81,7 @@ public class PickupScheduleServiceTest {
     }
 
     @Test
-    public void testAddPickupSchedule() throws ResourceNotFoundException {
+    public void testAddPickupSchedule() throws ResourceNotFoundException, NoSuchAlgorithmException {
         PickupScheduleDTO pickupScheduleDTO = new PickupScheduleDTO(null, null, null, null, null);
         pickupScheduleDTO.setCode(123L);
         pickupScheduleDTO.setAvailability(true);

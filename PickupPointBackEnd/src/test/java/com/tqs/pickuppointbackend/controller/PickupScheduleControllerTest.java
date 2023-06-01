@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class PickupScheduleControllerTest {
     }
 
     @Test
-    public void testAddPickupSchedule() throws ResourceNotFoundException {
+    public void testAddPickupSchedule() throws ResourceNotFoundException, NoSuchAlgorithmException {
         PickupScheduleDTO pickupScheduleDTO = new PickupScheduleDTO(null, null, null, null, null);
 
         PickupSchedule addedPickupSchedule = new PickupSchedule();

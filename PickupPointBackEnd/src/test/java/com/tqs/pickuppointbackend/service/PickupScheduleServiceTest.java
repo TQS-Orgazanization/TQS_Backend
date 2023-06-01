@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -87,7 +88,7 @@ class PickupScheduleServiceTest {
     }
 
     @Test
-    public void testAddPickupSchedule_ValidPickupScheduleDTO_ReturnsSavedPickupSchedule() throws ResourceNotFoundException {
+    public void testAddPickupSchedule_ValidPickupScheduleDTO_ReturnsSavedPickupSchedule() throws ResourceNotFoundException, NoSuchAlgorithmException {
         // Arrange
         PickupScheduleDTO pickupScheduleDTO = new PickupScheduleDTO(null, null, null, null, null);
         pickupScheduleDTO.setCode(123L);
