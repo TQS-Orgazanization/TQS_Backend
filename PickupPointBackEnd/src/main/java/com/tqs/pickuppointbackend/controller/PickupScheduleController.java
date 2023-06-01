@@ -64,6 +64,20 @@ public class PickupScheduleController {
 
     }
 
+    @GetMapping("/pickupschedules/available/{id}")
+    public ResponseEntity<List<PickupSchedule>> getPickupScheduleByAvailabiltyByPickupPointId(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupScheduleService.getAvailablePickupSchedulesByPickupPointId(id));
+
+    }
+
+    @GetMapping("/pickupschedules/nonavailable/{id}")
+    public ResponseEntity<List<PickupSchedule>> getPickupScheduleByNonAvailabiltyByPickupPointId(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupScheduleService.getNonAvailablePickupSchedulesByPickupPointId(id));
+
+    }
+
     @GetMapping("/pickupschedules/nonavailable")
     public ResponseEntity<List<PickupSchedule>> getPickupScheduleByNonAvailabilty() throws ResourceNotFoundException {
 

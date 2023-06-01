@@ -16,6 +16,9 @@ public interface PickupScheduleRepository extends JpaRepository<PickupSchedule, 
     @Query("SELECT p FROM PickupSchedule p WHERE p.user.userId = :userId")
     List<PickupSchedule> findByUserId(long userId);
 
+    @Query("SELECT p FROM PickupSchedule p WHERE p.pickupPoint.point_id = :id AND p.availability = :bool")
+    List<PickupSchedule> findByAvailabilityByPickupPointId(boolean bool, long id);
+
 
 }
 

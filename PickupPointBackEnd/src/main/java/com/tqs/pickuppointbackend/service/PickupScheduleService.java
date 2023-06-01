@@ -55,13 +55,21 @@ public class PickupScheduleService {
         return pickupScheduleRepository.findByUserId(id);
     }
 
-
     public List<PickupSchedule> getAvailablePickupSchedules() throws ResourceNotFoundException {
-        return pickupScheduleRepository.findByAvailability(false);
+        return pickupScheduleRepository.findByAvailability(true);
+    }
+
+
+    public List<PickupSchedule> getAvailablePickupSchedulesByPickupPointId(long id) throws ResourceNotFoundException {
+        return pickupScheduleRepository.findByAvailabilityByPickupPointId(true, id);
     }
 
     public List<PickupSchedule> getNonAvailablePickupSchedules() throws ResourceNotFoundException {
-        return pickupScheduleRepository.findByAvailability(true);
+        return pickupScheduleRepository.findByAvailability(false);
+    }
+
+    public List<PickupSchedule> getNonAvailablePickupSchedulesByPickupPointId(long id) throws ResourceNotFoundException {
+        return pickupScheduleRepository.findByAvailabilityByPickupPointId(false, id);
     }
 
     public PickupSchedule updatePickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
