@@ -84,7 +84,7 @@ public class PickupScheduleService {
 
         existingPickupSchedule.setCode(pickupSchedule.getCode());
         existingPickupSchedule.setAvailability(pickupSchedule.getAvailability());
-        
+
         return pickupScheduleRepository.save(existingPickupSchedule);
     }
 

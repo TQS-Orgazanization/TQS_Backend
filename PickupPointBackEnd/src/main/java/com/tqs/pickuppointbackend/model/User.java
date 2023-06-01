@@ -1,5 +1,6 @@
 package com.tqs.pickuppointbackend.model;
 
+import com.tqs.pickuppointbackend.constants.UserType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,6 +35,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "userType")
+    private UserType userType;
+
+    // Getters and setters
+
+    public String getPassword() {
+        return password;
+    }
+
     // Relationships
     // One-to-Many relationship with PickupSchedule
     @JsonIgnore
@@ -47,4 +57,7 @@ public class User {
         }
         return pickupSchedules;
     }
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserSession> userSessions;
 }
