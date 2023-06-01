@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Deployment
-        uses: actions/webapps-deploy@v2
+        uses: azure/webapps-deploy@v2
         with:
           app-name: "${{ env.AZURE_WEBAPP_NAME }}"
           publish-profile: "${{ secrets.AZURE_PUBLISH_PROFILE }}"
