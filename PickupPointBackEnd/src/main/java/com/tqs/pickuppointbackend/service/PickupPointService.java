@@ -26,6 +26,10 @@ public class PickupPointService {
         return pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
     }
 
+    public PickupPoint getPickupPointByUserId(long id) throws ResourceNotFoundException {
+        return pickupPointRepository.findByUserId(id);
+    }
+
     public List<PickupPoint> getAvailablePickupPoints() throws ResourceNotFoundException {
         return pickupPointRepository.findByAvailability(true);
     }

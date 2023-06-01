@@ -43,6 +43,13 @@ public class PickupPointController {
 
     }
 
+    @GetMapping("/pickuppoint/user/{user_id}")
+    public ResponseEntity<PickupPoint> getPickupPointByuserId(@PathVariable(value = "user_id") long id) throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupPointService.getPickupPointByUserId(id));
+
+    }
+
     @GetMapping("/pickuppoints/available")
     public ResponseEntity<List<PickupPoint>> getPickupPointById() throws ResourceNotFoundException {
 
