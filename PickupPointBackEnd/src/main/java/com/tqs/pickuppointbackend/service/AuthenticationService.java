@@ -8,16 +8,11 @@ import com.tqs.pickuppointbackend.model.User;
 import com.tqs.pickuppointbackend.model.UserSession;
 import com.tqs.pickuppointbackend.repository.SessionRepository;
 import com.tqs.pickuppointbackend.repository.UserRepository;
-import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Optional;
 import java.util.Random;
