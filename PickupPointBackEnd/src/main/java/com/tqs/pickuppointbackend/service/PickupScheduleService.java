@@ -1,5 +1,7 @@
 package com.tqs.pickuppointbackend.service;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Random;
@@ -21,7 +23,7 @@ import com.tqs.pickuppointbackend.repository.UserRepository;
 public class PickupScheduleService {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    
+
     @Autowired
     PickupScheduleRepository pickupScheduleRepository;
 
@@ -39,7 +41,7 @@ public class PickupScheduleService {
         return pickupScheduleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
     }
 
-    public PickupSchedule addPickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException{
+    public PickupSchedule addPickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException, NoSuchAlgorithmException{
 
         PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
         
@@ -118,9 +120,9 @@ public class PickupScheduleService {
     }
 
 
-    public static String generateRandomCode() {
-        Random random = new Random();
-        int code = random.nextInt(900000) + 100000; // Generates a random number between 100000 and 999999
+    public static String generateRandomCode() throws NoSuchAlgorithmException{
+        Random rand = SecureRandom.getInstanceStrong();
+        int code = rand.nextInt(900000) + 100000; // Generates a random number between 100000 and 999999
         return String.valueOf(code);
     }
 
