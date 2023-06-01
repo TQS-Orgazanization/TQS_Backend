@@ -20,15 +20,7 @@ public class RegisterController {
     }
 
     @PostMapping
-    public ResponseEntity<String> registerUser(@RequestBody UserDTO userDTO) {
-        
-        User user = new User();
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
-        user.setAddress(userDTO.getAddress());
-        user.setPhone(userDTO.getPhone());
-        user.setPassword(userDTO.getPassword());
-
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
 
         // Check if email already exists
         if (userRepository.existsByEmail(user.getEmail())) {
