@@ -11,8 +11,6 @@ import java.sql.Date;
 public class PickupScheduleDTO {
     private Long id;
     private Long code;
-    private Date startTime;
-    private Date endTime;
     private Boolean availability;
     private Long pickupPointId;
     private Long userId;

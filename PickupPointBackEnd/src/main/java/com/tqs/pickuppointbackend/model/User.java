@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,15 +34,17 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    // Getters and setters
-
-    public String getPassword() {
-        return password;
-    }
-
     // Relationships
     // One-to-Many relationship with PickupSchedule
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<PickupSchedule> pickupSchedules;
+
+    // Lazy initialization of pickupSchedules
+    public List<PickupSchedule> getPickupSchedules() {
+        if (pickupSchedules == null) {
+            pickupSchedules = new ArrayList<>();
+        }
+        return pickupSchedules;
+    }
 }

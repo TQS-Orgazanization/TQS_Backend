@@ -19,14 +19,8 @@ public class PickupSchedule {
     @Column(name = "code")
     private Long code;
 
-    @Column(name = "start_time")
-    private Date startTime;
-
-    @Column(name = "end_time")
-    private Date endTime;
-
     @Column(name = "availabity")
-    private Boolean availabilty;
+    private Boolean availability;
 
     // Relationships
     // Many-to-One relationship with PickupPoint
@@ -39,4 +33,8 @@ public class PickupSchedule {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
+    }
 }

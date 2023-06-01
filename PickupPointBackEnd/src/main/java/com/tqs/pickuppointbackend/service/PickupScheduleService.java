@@ -58,9 +58,7 @@ public class PickupScheduleService {
 
         PickupSchedule pickupSchedule = new PickupSchedule();
         pickupSchedule.setCode(pickupScheduleDTO.getCode());
-        pickupSchedule.setStartTime(pickupScheduleDTO.getStartTime());
-        pickupSchedule.setEndTime(pickupScheduleDTO.getEndTime());
-        pickupSchedule.setAvailabilty(pickupScheduleDTO.getAvailability());
+        pickupSchedule.setAvailability(pickupScheduleDTO.getAvailability());
 
 
         PickupPoint pickupPoint = pickupPointRepository.findById(pickupScheduleDTO.getPickupPointId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
