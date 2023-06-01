@@ -19,7 +19,7 @@ public class PickupSchedule {
     @Column(name = "code")
     private Long code;
 
-    @Column(name = "availabity")
+    @Column(name = "availability")
     private Boolean availability;
 
     // Relationships

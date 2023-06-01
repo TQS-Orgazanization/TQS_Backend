@@ -2,6 +2,7 @@ package com.tqs.pickuppointbackend.service;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,40 @@ public class PickupScheduleService {
     public PickupSchedule addPickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException{
 
         PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
+        
+        String code = generateRandomCode();
+        pickupSchedule.setCode(Long.parseLong(code));
+
         return pickupScheduleRepository.save(pickupSchedule);
         
+    }
+
+    public List<PickupSchedule> getPickupScheduleUserById(long id) {
+
+        return pickupScheduleRepository.findByUserId(id);
+    }
+
+
+    public List<PickupSchedule> getAvailablePickupSchedules() throws ResourceNotFoundException {
+        return pickupScheduleRepository.findByAvailability(false);
+    }
+
+    public List<PickupSchedule> getNonAvailablePickupSchedules() throws ResourceNotFoundException {
+        return pickupScheduleRepository.findByAvailability(true);
+    }
+
+    public PickupSchedule updatePickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
+
+        PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
+
+        PickupSchedule existingPickupSchedule = pickupScheduleRepository.findById(pickupSchedule.getId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
+        
+        if (existingPickupSchedule == null){ return null; }
+
+        existingPickupSchedule.setCode(pickupSchedule.getCode());
+        existingPickupSchedule.setAvailability(pickupSchedule.getAvailability());
+        
+        return pickupScheduleRepository.save(existingPickupSchedule);
     }
 
     public PickupSchedule deletePickupScheduleById(long id) throws ResourceNotFoundException {
@@ -75,4 +108,12 @@ public class PickupScheduleService {
         return pickupSchedule;
 
     }
+
+
+    public static String generateRandomCode() {
+        Random random = new Random();
+        int code = random.nextInt(900000) + 100000; // Generates a random number between 100000 and 999999
+        return String.valueOf(code);
+    }
+
 }

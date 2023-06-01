@@ -26,6 +26,14 @@ public class PickupPointService {
         return pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
     }
 
+    public List<PickupPoint> getAvailablePickupPoints() throws ResourceNotFoundException {
+        return pickupPointRepository.findByAvailability(true);
+    }
+
+    public List<PickupPoint> getNonAvailablePickupPoints() throws ResourceNotFoundException {
+        return pickupPointRepository.findByAvailability(false);
+    }
+
     public PickupPoint addPickupPoint(PickupPointDTO pickupPointDTO) {
 
         PickupPoint pickupPoint = pickupPointFromDTO(pickupPointDTO);
@@ -37,7 +45,7 @@ public class PickupPointService {
     public PickupPoint updatePickupPoint(PickupPointDTO pickupPointDTO) throws ResourceNotFoundException {
 
         PickupPoint pickupPoint = pickupPointFromDTO(pickupPointDTO);
-
+        System.out.println(pickupPoint.getPoint_id());
         PickupPoint existingPickupPoint = pickupPointRepository.findById(pickupPoint.getPoint_id()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
         
         if (existingPickupPoint == null){ return null; }
@@ -66,9 +74,9 @@ public class PickupPointService {
         pickupPoint.setAddress(pickupPointDTO.getAddress());
         pickupPoint.setContactInfo(pickupPointDTO.getContactInfo());
         pickupPoint.setAvailability(pickupPointDTO.isAvailability());
-
-        if(pickupPointDTO.getPointId() != null) {
-            pickupPoint.setPoint_id(pickupPointDTO.getPointId());
+        System.out.print(pickupPointDTO.getPoint_id());
+        if(pickupPointDTO.getPoint_id() != null) {
+            pickupPoint.setPoint_id(pickupPointDTO.getPoint_id());
         }
 
         return pickupPoint;

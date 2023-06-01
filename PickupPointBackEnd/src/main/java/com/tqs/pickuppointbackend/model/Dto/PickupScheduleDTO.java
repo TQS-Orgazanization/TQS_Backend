@@ -3,7 +3,6 @@ package com.tqs.pickuppointbackend.model.Dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import java.sql.Date;
 
 @Getter
 @Setter

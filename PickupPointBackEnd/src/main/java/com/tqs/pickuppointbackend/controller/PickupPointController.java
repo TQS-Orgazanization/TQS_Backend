@@ -43,6 +43,20 @@ public class PickupPointController {
 
     }
 
+    @GetMapping("/pickuppoints/available")
+    public ResponseEntity<List<PickupPoint>> getPickupPointById() throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupPointService.getAvailablePickupPoints());
+
+    }
+
+    @GetMapping("/pickuppoints/nonavailable")
+    public ResponseEntity<List<PickupPoint>> getPickupPointNonAvailable() throws ResourceNotFoundException {
+
+        return ResponseEntity.ok().body(pickupPointService.getNonAvailablePickupPoints());
+
+    }
+
     @PostMapping("/pickuppoint")
     public ResponseEntity<PickupPoint> addPickupPoint(@Valid @RequestBody PickupPointDTO pickupPointDTO) throws ResourceNotFoundException {
 
@@ -52,11 +66,12 @@ public class PickupPointController {
 
     @PutMapping("/pickuppoint/{id}")
     public ResponseEntity<PickupPoint> updatePickupPoint(@PathVariable(value = "id") Long id, @Valid @RequestBody PickupPointDTO pickupPointDTO) throws ResourceNotFoundException {
+        System.out.println(id);
         return ResponseEntity.ok(pickupPointService.updatePickupPoint(pickupPointDTO));
     }
 
     @DeleteMapping("/pickuppoint/{id}")
-    public ResponseEntity<PickupPoint> deletePickupPointById(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+    public ResponseEntity<PickupPoint> deletePickupPointById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
 
         return ResponseEntity.ok().body(pickupPointService.deletePickupPointById(id));
     
