@@ -1,0 +1,26 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+env:
+  AZURE_WEBAPP_NAME: TQSProject
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deployment
+        uses: actions/webapps-deploy@v2
+        with:
+          app-name: "${{ env.AZURE_WEBAPP_NAME }}"
+          publish-profile: "${{ secrets.AZURE_PUBLISH_PROFILE }}"
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+      
