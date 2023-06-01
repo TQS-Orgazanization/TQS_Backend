@@ -50,6 +50,12 @@ public class PickupScheduleService {
         
     }
 
+    public List<PickupSchedule> getPickupScheduleUserById(long id) {
+
+        return pickupScheduleRepository.findByUserId(id);
+    }
+
+
     public List<PickupSchedule> getAvailablePickupSchedules() throws ResourceNotFoundException {
         return pickupScheduleRepository.findByAvailability(false);
     }
