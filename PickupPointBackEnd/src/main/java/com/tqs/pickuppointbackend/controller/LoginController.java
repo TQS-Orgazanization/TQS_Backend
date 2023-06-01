@@ -21,6 +21,7 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) {
+        
         // Check if user exists with the given email
         User user = userRepository.findByEmail(email);
         if (user == null) {
