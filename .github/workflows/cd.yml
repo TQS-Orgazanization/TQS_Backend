@@ -26,6 +26,7 @@ jobs:
 
       - name: Build and deploy
         run: |
+          cd PickupPointBackEnd
           mvn clean package
 
           # Example: Deploy to a remote Ubuntu machine via SSH
