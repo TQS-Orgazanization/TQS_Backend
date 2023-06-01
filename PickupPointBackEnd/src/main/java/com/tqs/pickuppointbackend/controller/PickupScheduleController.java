@@ -3,6 +3,7 @@ package com.tqs.pickuppointbackend.controller;
 
 import lombok.extern.log4j.Log4j2;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -51,7 +52,7 @@ public class PickupScheduleController {
     }
 
     @PostMapping("/pickupschedule")
-    public ResponseEntity<PickupSchedule> addPickupSchedule(@RequestBody PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
+    public ResponseEntity<PickupSchedule> addPickupSchedule(@RequestBody PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException, NoSuchAlgorithmException {
 
         return ResponseEntity.ok().body(pickupScheduleService.addPickupSchedule(pickupScheduleDTO));
     
