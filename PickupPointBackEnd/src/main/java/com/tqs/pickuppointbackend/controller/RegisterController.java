@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.tqs.pickuppointbackend.model.User;
+import com.tqs.pickuppointbackend.model.Dto.UserDTO;
 import com.tqs.pickuppointbackend.repository.UserRepository;
 
 @RestController
@@ -19,8 +20,16 @@ public class RegisterController {
     }
 
     @PostMapping
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(@RequestBody UserDTO userDTO) {
         
+        User user = new User();
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        user.setAddress(userDTO.getAddress());
+        user.setPhone(userDTO.getPhone());
+        user.setPassword(userDTO.getPassword());
+
+
         // Check if email already exists
         if (userRepository.existsByEmail(user.getEmail())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists. Registration denied.");
