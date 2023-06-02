@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+env:
+  AZURE_WEBAPP_NAME: TQSProject
+  AZURE_WEBAPP_PACKAGE_PATH: "./PickupPointBackEnd"
+
+
 jobs:
   publish:
     runs-on: ubuntu-latest
