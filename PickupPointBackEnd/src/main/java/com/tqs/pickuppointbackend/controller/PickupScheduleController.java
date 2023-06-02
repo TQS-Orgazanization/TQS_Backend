@@ -87,7 +87,8 @@ public class PickupScheduleController {
     }
 
     @PutMapping("/pickupschedule/{id}")
-    public ResponseEntity<PickupSchedule> updatePickupSchedule(@PathVariable(value = "id") Long id, @Valid @RequestBody PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
+    public ResponseEntity<PickupSchedule> updatePickupSchedule(@PathVariable(value = "id") long id, @Valid @RequestBody PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
+        System.out.println(id);
         return ResponseEntity.ok(pickupScheduleService.updatePickupSchedule(pickupScheduleDTO));
     }
 

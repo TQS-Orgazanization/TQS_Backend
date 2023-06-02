@@ -41,6 +41,8 @@ public class NotificationService {
 
         Notification notification = new Notification();
         notification.setMessage(notificationDTO.getMessage());
+        notification.setUserId(notificationDTO.getUserId());
+
 
         return notification;
 

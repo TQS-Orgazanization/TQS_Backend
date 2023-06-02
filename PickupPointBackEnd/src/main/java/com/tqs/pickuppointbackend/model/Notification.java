@@ -25,8 +25,7 @@ public class Notification {
     @Column(name = "message")
     private String message;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Long userId;
     
 }
