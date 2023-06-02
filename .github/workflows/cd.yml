@@ -6,41 +6,17 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build and analyze
+  publish:
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0.33
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: pickuppoint
-        ports:
-          - 3306:3306
     
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v2
+      - uses: actions/checkout@v3
+      
+      - name: Deployment
+        uses: azure/webapps-deploy@v2
         with:
-          java-version: '17'
-          distribution: 'adopt'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
 
-      - name: Set up Maven
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y maven
-
-      - name: Build and deploy
-        run: |
-          cd PickupPointBackEnd
-          mvn clean package
-
-          # Example: Deploy to a remote Ubuntu machine via SSH
-          # Make sure to replace the placeholders with your actual values
-          ssh -v fantao@deti-tqs-08.ua.pt "mkdir -p /project"
-          scp target/PickupPointBackEnd-0.0.1-SNAPSHOT.jar fantao@deti-tqs-08.ua.pt:/project
-          ssh -v fantao@deti-tqs-08.ua.pt "sudo systemctl restart PickupPointBackEnd-0.0.1-SNAPSHOT"
+      -
