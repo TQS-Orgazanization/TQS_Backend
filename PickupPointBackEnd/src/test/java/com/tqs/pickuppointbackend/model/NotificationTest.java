@@ -10,7 +10,7 @@ public class NotificationTest {
         Long id = 1L;
         String message = "Test message";
         //User user = new User(); // You can provide a valid User object here if needed
-        Long user_id = 1L
+        Long user_id = 1L;
 
         Notification notification = new Notification();
         notification.setId(id);
