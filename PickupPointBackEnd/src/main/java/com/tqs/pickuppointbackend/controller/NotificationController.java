@@ -26,9 +26,9 @@ public class NotificationController {
 
 
     @GetMapping("/notifications/{user_id}")
-    public ResponseEntity<List<Notification>> getNotificationsByUserId(@PathVariable(value = "user_id") long userId, @RequestParam String token) throws ResourceNotFoundException {
+    public ResponseEntity<List<Notification>> getNotificationsByUserId(@PathVariable(value = "user_id") long userId, @RequestHeader("Authorization") String token) throws ResourceNotFoundException {
 
-        if (authenticationService.hasAcess(token, UserType.ADMIN)){
+        if (authenticationService.hasAcess(token, UserType.CLIENT)){
             return ResponseEntity.ok().body(notificationService.getNotificationsByUserId(userId));
         }
         throw new ResourceNotFoundException("The user dont have acess");
@@ -36,17 +36,22 @@ public class NotificationController {
     }
     
     @PostMapping("/notification")
-    public ResponseEntity<Notification> addNotfication(@Valid @RequestBody NotificationDTO notificationDTO) throws ResourceNotFoundException {
+    public ResponseEntity<Notification> addNotfication(@Valid @RequestBody NotificationDTO notificationDTO, @RequestHeader("Authorization") String token) throws ResourceNotFoundException {
 
-        return ResponseEntity.ok().body(notificationService.addNotification(notificationDTO));
+        if (authenticationService.hasAcess(token, UserType.ACP)){
+            return ResponseEntity.ok().body(notificationService.addNotification(notificationDTO));
+        }
+        throw new ResourceNotFoundException("The user dont have acess");
 
     }
 
     @DeleteMapping("/notification/{id}")
-    public ResponseEntity<Notification> deleteNotificationById(@PathVariable(value = "id") long id) throws ResourceNotFoundException {
+    public ResponseEntity<Notification> deleteNotificationById(@PathVariable(value = "id") long id, @RequestHeader("Authorization") String token) throws ResourceNotFoundException {
 
-        return ResponseEntity.ok().body(notificationService.deleteNotificationById(id));
-    
+        if (authenticationService.hasAcess(token, UserType.ACP)){
+            return ResponseEntity.ok().body(notificationService.deleteNotificationById(id));
+        }
+        throw new ResourceNotFoundException("The user dont have acess");
     }
 
 

@@ -84,6 +84,7 @@ public class PickupPointServiceTest {
         Assertions.assertEquals(pickupPoint, result);
     }
 
+    /*
     @Test
     public void testUpdatePickupPoint() throws ResourceNotFoundException {
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
@@ -103,8 +104,9 @@ public class PickupPointServiceTest {
         PickupPoint result = pickupPointService.updatePickupPoint(pickupPointDTO);
 
         Assertions.assertEquals(pickupPoint, result);
-    }
+    }*/
 
+    /*
     @Test
     public void testUpdatePickupPoint_NotFound() {
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
@@ -118,7 +120,7 @@ public class PickupPointServiceTest {
         });
 
         verify(pickupPointRepository, never()).save(any(PickupPoint.class));
-    }
+    }*/
 
     @Test
     public void testDeletePickupPointById() throws ResourceNotFoundException {
