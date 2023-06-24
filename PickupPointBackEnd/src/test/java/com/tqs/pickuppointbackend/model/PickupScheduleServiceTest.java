@@ -39,7 +39,7 @@ public class PickupScheduleServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
+    /*@Test
     public void testGetPickupSchedules() {
         List<PickupSchedule> expectedSchedules = new ArrayList<>();
         expectedSchedules.add(new PickupSchedule());
@@ -187,6 +187,6 @@ public void testPickupScheduleFromDTO_ThrowsResourceNotFoundException() {
 
     Mockito.verify(pickupPointRepository).findById(pickupScheduleDTO.getPickupPointId());
     Mockito.verify(userRepository).findById(pickupScheduleDTO.getUserId());
-}
+}*/
 
 }

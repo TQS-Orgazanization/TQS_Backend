@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import com.tqs.pickuppointbackend.model.PickupPoint;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,6 +26,22 @@ public class PickupPointDTO {
     // Relationships
     private List<PickupScheduleDTO> pickupSchedules;
     private Long user_id;
+
+    public PickupPoint pickupPointFromDTO() {
+
+        PickupPoint pickupPoint = new PickupPoint();
+        pickupPoint.setName(name);
+        pickupPoint.setAddress(address);
+        pickupPoint.setContactInfo(contactInfo);
+        pickupPoint.setAvailability(availability);
+        pickupPoint.setUser_id(user_id);
+        if(point_id != null) {
+            pickupPoint.setPoint_id(point_id);
+        }
+
+        return pickupPoint;
+
+    }
 
 
 

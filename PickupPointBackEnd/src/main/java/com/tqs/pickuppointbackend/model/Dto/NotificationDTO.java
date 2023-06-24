@@ -1,6 +1,7 @@
 package com.tqs.pickuppointbackend.model.Dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tqs.pickuppointbackend.model.Notification;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,5 +19,15 @@ public class NotificationDTO {
     
     @JsonIgnore
     private Long userId;
+
+    public Notification notificationFromDTO() {
+
+        Notification notification = new Notification();
+        notification.setMessage(message);
+        notification.setUserId(userId);
+
+        return notification;
+
+    }
 
 }
