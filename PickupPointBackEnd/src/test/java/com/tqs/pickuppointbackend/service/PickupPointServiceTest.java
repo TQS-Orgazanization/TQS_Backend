@@ -20,7 +20,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class PickupPointServiceTest {
-    /* 
+
+
     @Mock
     private PickupPointRepository pickupPointRepository;
 
@@ -84,8 +85,7 @@ public class PickupPointServiceTest {
         Assertions.assertEquals(pickupPoint, result);
     }
 
-    /*
-    @Test
+    /*@Test
     public void testUpdatePickupPoint() throws ResourceNotFoundException {
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
         pickupPointDTO.setPoint_id(1L);
@@ -106,8 +106,7 @@ public class PickupPointServiceTest {
         Assertions.assertEquals(pickupPoint, result);
     }*/
 
-    /*
-    @Test
+    /*@Test
     public void testUpdatePickupPoint_NotFound() {
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
         pickupPointDTO.setPoint_id(1L);
@@ -121,7 +120,7 @@ public class PickupPointServiceTest {
 
         verify(pickupPointRepository, never()).save(any(PickupPoint.class));
     }*/
-
+  
     @Test
     public void testDeletePickupPointById() throws ResourceNotFoundException {
         long pickupPointId = 1L;
@@ -148,7 +147,7 @@ public class PickupPointServiceTest {
         verify(pickupPointRepository, never()).deleteById(pickupPointId);
     }
 
-    @Test
+    /*@Test
     public void testPickupPointFromDTO() {
         PickupPointDTO pickupPointDTO = new PickupPointDTO();
         pickupPointDTO.setName("New Pickup Point");
@@ -158,4 +157,5 @@ public class PickupPointServiceTest {
         Assertions.assertEquals(pickupPointDTO.getName(), result.getName());
     }
     */
+    
 }

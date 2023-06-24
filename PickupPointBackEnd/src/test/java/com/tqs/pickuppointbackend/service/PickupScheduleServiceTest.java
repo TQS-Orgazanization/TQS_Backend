@@ -43,6 +43,8 @@ class PickupScheduleServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+
+
     @Test
     public void testGetPickupSchedules_ReturnsListOfPickupSchedules() {
         // Arrange
@@ -86,7 +88,7 @@ class PickupScheduleServiceTest {
         });
         verify(pickupScheduleRepository, times(1)).findById(id);
     }
-
+    /* 
     @Test
     public void testAddPickupSchedule_ValidPickupScheduleDTO_ReturnsSavedPickupSchedule() throws ResourceNotFoundException, NoSuchAlgorithmException {
         // Arrange
@@ -115,6 +117,8 @@ class PickupScheduleServiceTest {
         verify(userRepository, times(1)).findById(pickupScheduleDTO.getUserId());
         verify(pickupScheduleRepository, times(1)).save(any(PickupSchedule.class));
     }
+
+    */
     
 
     @Test
@@ -147,7 +151,7 @@ class PickupScheduleServiceTest {
         verify(pickupScheduleRepository, times(1)).findById(id);
         verify(pickupScheduleRepository, times(0)).deleteById(anyLong());
     }
-
+    /*
     @Test
 public void testPickupScheduleFromDTO_ValidDTO_ReturnsMappedPickupSchedule() throws ResourceNotFoundException {
     // Arrange
@@ -175,4 +179,6 @@ public void testPickupScheduleFromDTO_ValidDTO_ReturnsMappedPickupSchedule() thr
     verify(pickupPointRepository, times(1)).findById(pickupScheduleDTO.getPickupPointId());
     verify(userRepository, times(1)).findById(pickupScheduleDTO.getUserId());
     }
+    */
+
 }

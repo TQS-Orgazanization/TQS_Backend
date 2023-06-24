@@ -24,6 +24,10 @@ public class PickupPointService {
     @Autowired
     NotificationService notificationService;
 
+    Utils utils = new Utils();
+
+
+
     public List<PickupPoint> getPickupPoints() {
         return pickupPointRepository.findAll();
     }
@@ -50,7 +54,7 @@ public class PickupPointService {
 
     public PickupPoint addPickupPoint(PickupPointDTO pickupPointDTO) {
 
-        PickupPoint pickupPoint = pickupPointFromDTO(pickupPointDTO);
+        PickupPoint pickupPoint = utils.pickupPointFromDTO(pickupPointDTO);
         pickupPoint.setPickupSchedules(new ArrayList<PickupSchedule>());
 
         return pickupPointRepository.save(pickupPoint);
@@ -58,8 +62,8 @@ public class PickupPointService {
 
     public PickupPoint updatePickupPoint(Long id, UpdateRequest request) throws ResourceNotFoundException {
 
-
-        PickupPoint existingPickupPoint = pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
+        PickupPoint pickupPoint = utils.pickupPointFromDTO(pickupPointDTO);
+        PickupPoint existingPickupPoint = pickupPointRepository.findById(pickupPoint.getPoint_id()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
         
         if (existingPickupPoint == null){ return null; }
 
@@ -91,6 +95,7 @@ public class PickupPointService {
         
     }
 
+    /*
     public PickupPoint pickupPointFromDTO(PickupPointDTO pickupPointDTO) {
 
         PickupPoint pickupPoint = new PickupPoint();
@@ -107,5 +112,6 @@ public class PickupPointService {
         return pickupPoint;
 
     }
+    */
 
 }

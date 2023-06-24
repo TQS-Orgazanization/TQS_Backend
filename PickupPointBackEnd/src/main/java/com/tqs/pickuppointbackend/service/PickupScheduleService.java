@@ -38,6 +38,8 @@ public class PickupScheduleService {
     @Autowired
     NotificationService notificationService;
 
+    Utils utils = new Utils();
+
     public List<PickupSchedule> getPickupSchedules() {
         return pickupScheduleRepository.findAll();
     }
@@ -48,9 +50,9 @@ public class PickupScheduleService {
 
     public PickupSchedule addPickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException, NoSuchAlgorithmException{
 
-        PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
+        PickupSchedule pickupSchedule = utils.pickupScheduleFromDTO(pickupScheduleDTO);
         
-        String code = generateRandomCode();
+        String code = Utils.generateRandomCode();
         pickupSchedule.setCode(Long.parseLong(code));
 
         return pickupScheduleRepository.save(pickupSchedule);
@@ -81,7 +83,7 @@ public class PickupScheduleService {
 
     public PickupSchedule updatePickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
 
-        PickupSchedule pickupSchedule = pickupScheduleFromDTO(pickupScheduleDTO);
+        PickupSchedule pickupSchedule = utils.pickupScheduleFromDTO(pickupScheduleDTO);
         PickupSchedule existingPickupSchedule = pickupScheduleRepository.findById(pickupSchedule.getId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
         
         if (existingPickupSchedule == null){ return null; }
@@ -107,6 +109,7 @@ public class PickupScheduleService {
         
     }
 
+    /*
     public PickupSchedule pickupScheduleFromDTO(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
 
         PickupSchedule pickupSchedule = new PickupSchedule();
@@ -128,12 +131,7 @@ public class PickupScheduleService {
         return pickupSchedule;
 
     }
+     */
 
-
-    public static String generateRandomCode() throws NoSuchAlgorithmException{
-        Random rand = SecureRandom.getInstanceStrong();
-        int code = rand.nextInt(900000) + 100000; // Generates a random number between 100000 and 999999
-        return String.valueOf(code);
-    }
-
+    
 }
