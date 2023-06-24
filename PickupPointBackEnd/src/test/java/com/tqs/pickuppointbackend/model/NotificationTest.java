@@ -9,15 +9,16 @@ public class NotificationTest {
     public void testNotificationClass() {
         Long id = 1L;
         String message = "Test message";
-        User user = new User(); // You can provide a valid User object here if needed
+        //User user = new User(); // You can provide a valid User object here if needed
+        Long user_id = 1L;
 
         Notification notification = new Notification();
         notification.setId(id);
         notification.setMessage(message);
-        notification.setUser(user);
+        notification.setUserId(user_id);
 
         assertEquals(id, notification.getId());
         assertEquals(message, notification.getMessage());
-        assertEquals(user, notification.getUser());
+        assertEquals(user_id, notification.getUserId());
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.tqs.pickuppointbackend.exceptions.ResourceNotFoundException;
 import com.tqs.pickuppointbackend.model.PickupPoint;
 import com.tqs.pickuppointbackend.model.PickupSchedule;
+import com.tqs.pickuppointbackend.model.Dto.NotificationDTO;
 import com.tqs.pickuppointbackend.model.Dto.PickupPointDTO;
 import com.tqs.pickuppointbackend.repository.PickupPointRepository;
 
@@ -19,6 +20,9 @@ public class PickupPointService {
     
     @Autowired
     PickupPointRepository pickupPointRepository;
+
+    @Autowired
+    NotificationService notificationService;
 
     public List<PickupPoint> getPickupPoints() {
         return pickupPointRepository.findAll();
@@ -61,6 +65,20 @@ public class PickupPointService {
 
         existingPickupPoint.setAvailability(request.isAvailability());
 
+        /*
+        existingPickupPoint.setName(pickupPoint.getName());
+        existingPickupPoint.setAddress(pickupPoint.getAddress());
+        existingPickupPoint.setContactInfo(pickupPoint.getContactInfo());
+        existingPickupPoint.setAvailability(pickupPoint.isAvailability());
+        existingPickupPoint.setUser_id(pickupPoint.getUser_id());*/
+
+        NotificationDTO notificationDTO = new NotificationDTO();
+        notificationDTO.setMessage("ACP accepted");
+        notificationDTO.setUserId(existingPickupPoint.getUser_id());
+
+        notificationService.addNotification(notificationDTO);
+
+     
         return pickupPointRepository.save(existingPickupPoint);
     }
 

@@ -1,0 +1,45 @@
+name: Deploy to Ubuntu
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AZURE_WEBAPP_NAME: TQSProject
+  AZURE_WEBAPP_PACKAGE_PATH: "./PickupPointBackEnd/target"
+
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0.33
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: pickuppoint
+        ports:
+          - 3306:3306
+    
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'adopt'
+      
+      - name: Build
+        run: |
+              cd PickupPointBackEnd
+              mvn clean package
+      
+      - name: Deployment
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.tqs.pickuppointbackend.model.User;
-import com.tqs.pickuppointbackend.model.Dto.UserDTO;
 import com.tqs.pickuppointbackend.repository.UserRepository;
 
 @RestController
