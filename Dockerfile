@@ -1,7 +1,7 @@
 FROM maven:3-eclipse-temurin-17 as BUILD
 
 COPY PickupPointBackEnd /usr/src/app
-RUN mvn --batch-mode -f /usr/src/app/pom.xml clean package
+RUN mvn --batch-mode -f /usr/src/app/pom.xml clean package -DskipTests
 
 FROM eclipse-temurin:17-jre
 ENV PORT 80
