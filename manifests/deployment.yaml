@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tqsDev
+  labels:
+    app: tqsDev
+  namespace: tqs-services
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tqsDev
+  template:
+    metadata:
+      labels:
+        app: tqsDev
+    spec:
+      containers:
+        - name: tqsDev
+          image: tqscontainer2.azurecr.io/tqs-backend:latest
+          ports:
+            - containerPort: 80
