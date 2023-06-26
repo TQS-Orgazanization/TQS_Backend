@@ -2,10 +2,10 @@
 
 ## Link to backend deployment
     
-    http://20.93.198.246/
+    https://www.tqsaddress.com/tqs-backend
 
 ## Link of the Documentation
    
-    http://20.93.198.246/swagger-ui/#/
+    https://www.tqsaddress.com/tqs-backend/swagger-ui/#/
 
 
