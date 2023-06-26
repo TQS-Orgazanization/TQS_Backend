@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: tqs-backend
-          image: tqscontainer2.azurecr.io/grupo3/tqs-backend:1.23.0-SNAPSHOT
+          image: tqscontainer2.azurecr.io/tqs-backend:latest
           imagePullPolicy: Always
           volumeMounts:
             - name: log
