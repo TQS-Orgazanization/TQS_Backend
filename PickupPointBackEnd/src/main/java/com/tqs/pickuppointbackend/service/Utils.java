@@ -17,7 +17,9 @@ import com.tqs.pickuppointbackend.model.Dto.PickupPointDTO;
 import com.tqs.pickuppointbackend.model.Dto.PickupScheduleDTO;
 import com.tqs.pickuppointbackend.repository.PickupPointRepository;
 import com.tqs.pickuppointbackend.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Utils {
 
     @Autowired
