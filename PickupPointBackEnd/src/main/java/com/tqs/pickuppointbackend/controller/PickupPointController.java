@@ -62,19 +62,13 @@ public class PickupPointController {
     @GetMapping("/pickuppoints/available")
     public ResponseEntity<List<PickupPoint>> getPickupPointById(@RequestHeader("Authorization") String token) throws ResourceNotFoundException {
 
-        if (authenticationService.hasAcess(token, UserType.CLIENT)){
-            return ResponseEntity.ok().body(pickupPointService.getAvailablePickupPoints());
-        }
-        throw new ResourceNotFoundException("The user dont have acess");
+        return ResponseEntity.ok().body(pickupPointService.getAvailablePickupPoints());
+
     }
 
     @GetMapping("/pickuppoints/nonavailable")
     public ResponseEntity<List<PickupPoint>> getPickupPointNonAvailable(@RequestHeader("Authorization") String token) throws ResourceNotFoundException {
-        if (authenticationService.hasAcess(token, UserType.CLIENT)){
             return ResponseEntity.ok().body(pickupPointService.getNonAvailablePickupPoints());
-        }
-        throw new ResourceNotFoundException("The user dont have acess");
-
     }
 
     @PostMapping("/pickuppoint")
