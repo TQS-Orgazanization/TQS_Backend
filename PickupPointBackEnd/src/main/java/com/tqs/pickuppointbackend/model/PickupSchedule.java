@@ -1,8 +1,6 @@
 package com.tqs.pickuppointbackend.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Date;
 
@@ -12,6 +10,9 @@ import javax.persistence.*;
 @Setter
 @Entity
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "pickup_schedule")
 public class PickupSchedule {
     @Id

@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import lombok.extern.log4j.Log4j2;
@@ -52,13 +53,23 @@ public class PickupScheduleService {
 
     public PickupSchedule addPickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException, NoSuchAlgorithmException{
 
-        PickupSchedule pickupSchedule = utils.pickupScheduleFromDTO(pickupScheduleDTO);
-        
-        String code = Utils.generateRandomCode();
-        pickupSchedule.setCode(Long.parseLong(code));
 
-        log.info("End:" + pickupSchedule);
-        return pickupScheduleRepository.save(pickupSchedule);
+        //PickupSchedule pickupSchedule = utils.pickupScheduleFromDTO(pickupScheduleDTO);
+        
+        //String code = Utils.generateRandomCode();
+        //pickupSchedule.setCode(Long.parseLong(code));
+
+        Optional<PickupPoint> pickup = pickupPointRepository.findById(pickupScheduleDTO.getPickupPointId());
+        Optional<User> user = userRepository.findById(pickupScheduleDTO.getUserId());
+
+        if (pickup.isEmpty() || user.isEmpty()){
+            throw new ResourceNotFoundException("PickupPoint or User not found");
+        }
+
+        PickupSchedule pickSchedule = PickupSchedule.builder().pickupPoint(pickup.get()).user(user.get()).build();
+
+        log.info("End:" + pickSchedule);
+        return pickupScheduleRepository.save(pickSchedule);
     }
 
     public List<PickupSchedule> getPickupScheduleUserById(long id) {
