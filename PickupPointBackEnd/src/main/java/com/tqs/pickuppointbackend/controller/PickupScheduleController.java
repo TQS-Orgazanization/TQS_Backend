@@ -62,6 +62,7 @@ public class PickupScheduleController {
 
     @PostMapping("/pickupschedule")
     public ResponseEntity<PickupSchedule> addPickupSchedule(@RequestBody PickupScheduleDTO pickupScheduleDTO, @RequestHeader("Authorization") String token) throws ResourceNotFoundException, NoSuchAlgorithmException {
+        log.info("Start addPickupSchedule: " + pickupScheduleDTO);
 
         if (authenticationService.hasAcess(token, UserType.CLIENT)){
             return ResponseEntity.ok().body(pickupScheduleService.addPickupSchedule(pickupScheduleDTO));

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Random;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import com.tqs.pickuppointbackend.repository.UserRepository;
 
 
 @Service
+@Log4j2
 public class PickupScheduleService {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -55,8 +57,8 @@ public class PickupScheduleService {
         String code = Utils.generateRandomCode();
         pickupSchedule.setCode(Long.parseLong(code));
 
+        log.info("End:" + pickupSchedule);
         return pickupScheduleRepository.save(pickupSchedule);
-        
     }
 
     public List<PickupSchedule> getPickupScheduleUserById(long id) {
