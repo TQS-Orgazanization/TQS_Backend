@@ -9,7 +9,7 @@ env:
     AZURE_CONTAINER_REGISTRY: tqscontainer2
     CLUSTER_NAME: tqscluster
     CLUSTER_RESOURCE_GROUP: tqs_group
-    CONTAINER_NAME: tqs-backendd
+    CONTAINER_NAME: tqs-backend
     DEPLOYMENT_MANIFEST_PATH: |
         manifests/deployment.yaml
         manifests/service.yaml
