@@ -83,7 +83,13 @@ public class PickupScheduleService {
 
 
     public List<PickupSchedule> getAvailablePickupSchedulesByPickupPointId(long id) throws ResourceNotFoundException {
-        return pickupScheduleRepository.findByAvailabilityByPickupPointId(true, id);
+        Optional<PickupPoint> pickupoint = pickupPointRepository.findById(id);
+
+        if (pickupoint.isEmpty()){
+            throw new ResourceNotFoundException("PickupPoint not found");
+        }
+
+        return pickupScheduleRepository.findByAvailabilityAndPickupPoint(true, pickupoint.get());
     }
 
     public List<PickupSchedule> getNonAvailablePickupSchedules() throws ResourceNotFoundException {
