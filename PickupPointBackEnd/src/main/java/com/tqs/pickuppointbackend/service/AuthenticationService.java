@@ -45,8 +45,6 @@ public class AuthenticationService {
         if (!user.getPassword().equals(password)) {
             return null;
         }
-
-        Random random = new Random();
         Date date = new Date();
         long millis = date.getTime();
 
