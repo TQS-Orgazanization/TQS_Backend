@@ -109,7 +109,7 @@ public class PickupScheduleController {
     @PutMapping("/pickupschedule/{id}")
     public ResponseEntity<PickupSchedule> updatePickupSchedule(@PathVariable(value = "id") Long id, @Valid @RequestBody PickupScheduleDTO pickupScheduleDTO, @RequestHeader("Authorization") String token) throws ResourceNotFoundException {
         if (authenticationService.hasAcess(token, UserType.ACP)){
-            return ResponseEntity.ok(pickupScheduleService.updatePickupSchedule(pickupScheduleDTO));
+            return ResponseEntity.ok(pickupScheduleService.updatePickupSchedule(id, pickupScheduleDTO));
         }
         throw new ResourceNotFoundException("The user dont have acess");
     }

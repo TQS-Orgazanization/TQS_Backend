@@ -107,23 +107,29 @@ public class PickupScheduleService {
         return pickupScheduleRepository.findByAvailabilityAndPickupPoint(false, pickupoint.get());
     }
 
-    public PickupSchedule updatePickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
+    public PickupSchedule updatePickupSchedule(Long id, PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
 
-        PickupSchedule pickupSchedule = utils.pickupScheduleFromDTO(pickupScheduleDTO);
-        PickupSchedule existingPickupSchedule = pickupScheduleRepository.findById(pickupSchedule.getId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
+        //PickupSchedule pickupSchedule = utils.pickupScheduleFromDTO(pickupScheduleDTO);
+        //PickupSchedule existingPickupSchedule = pickupScheduleRepository.findById(pickupSchedule.getId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Schedule Not Found!"));
         
-        if (existingPickupSchedule == null){ return null; }
+        //if (existingPickupSchedule == null){ return null; }
 
-        existingPickupSchedule.setCode(pickupSchedule.getCode());
-        existingPickupSchedule.setAvailability(pickupSchedule.getAvailability());
+        //existingPickupSchedule.setCode(pickupSchedule.getCode());
+        //existingPickupSchedule.setAvailability(pickupSchedule.getAvailability());
+
+        Optional<PickupSchedule> pointSchedule = pickupScheduleRepository.findById(id);
+
+        if (pointSchedule.isEmpty()){ throw new ResourceNotFoundException("PickupPoint not found"); }
+
+        PickupSchedule pick = pointSchedule.get();
+        pick.setAvailability(pickupScheduleDTO.getAvailability());
 
         NotificationDTO notificationDTO = new NotificationDTO();
         notificationDTO.setMessage("Package Received");
-        notificationDTO.setUserId(existingPickupSchedule.getUser().getUserId());
 
         notificationService.addNotification(notificationDTO);
 
-        return pickupScheduleRepository.save(existingPickupSchedule);
+        return pickupScheduleRepository.save(pick);
     }
 
     public PickupSchedule deletePickupScheduleById(long id) throws ResourceNotFoundException {

@@ -62,14 +62,11 @@ public class PickupPointService {
 
     public PickupPoint updatePickupPoint(Long id, UpdateRequest request) throws ResourceNotFoundException {
 
-        //PickupPoint existingPickupPoint = pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
+        PickupPoint existingPickupPoint = pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
 
-        Optional<PickupPoint> pickupPoint = pickupPointRepository.findById(id);
+        if (existingPickupPoint == null){ return null; }
 
-        if (pickupPoint.isEmpty()){ throw new ResourceNotFoundException("PickupPoint not found"); }
-
-        PickupPoint pick = pickupPoint.get();
-        pick.setAvailability(request.isAvailability());
+        existingPickupPoint.setAvailability(request.isAvailability());
 
         /*
         existingPickupPoint.setName(pickupPoint.getName());
@@ -80,10 +77,11 @@ public class PickupPointService {
 
         NotificationDTO notificationDTO = new NotificationDTO();
         notificationDTO.setMessage("ACP accepted");
-        notificationDTO.setUserId(pick.getUser_id());
+        notificationDTO.setUserId(existingPickupPoint.getUser_id());
 
         notificationService.addNotification(notificationDTO);
-        return pickupPointRepository.save(pick);
+
+        return pickupPointRepository.save(existingPickupPoint);
     }
 
     public PickupPoint deletePickupPointById(long id) throws ResourceNotFoundException {
