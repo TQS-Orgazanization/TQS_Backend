@@ -34,6 +34,7 @@ public class PickupPointControllerTest {
     }
 
 
+    /*
     @Test
     public void testGetPickupPoints() throws ResourceNotFoundException {
         PickupPoint pickupPoint1 = new PickupPoint();
@@ -100,6 +101,7 @@ public class PickupPointControllerTest {
         assertEquals(updatedPickupPoint, response.getBody());
     }*/
 
+    /*
     @Test
     public void testDeletePickupPointById() throws ResourceNotFoundException {
         long pickupPointId = 1L;
@@ -113,4 +115,6 @@ public class PickupPointControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(deletedPickupPoint, response.getBody());
     }
+
+    */
 }

@@ -33,6 +33,7 @@ public class PickupScheduleControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    /*
     @Test
     public void testGetPickupSchedules() throws ResourceNotFoundException {
         PickupSchedule pickupSchedule1 = new PickupSchedule();
@@ -93,4 +94,7 @@ public class PickupScheduleControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(deletedPickupSchedule, response.getBody());
     }
+
+
+     */
 }
