@@ -1,5 +1,6 @@
 package com.tqs.pickuppointbackend.repository;
 
+import com.tqs.pickuppointbackend.model.PickupPoint;
 import com.tqs.pickuppointbackend.model.PickupSchedule;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public interface PickupScheduleRepository extends JpaRepository<PickupSchedule, 
 
     @Query("SELECT p FROM PickupSchedule p WHERE p.pickupPoint.point_id = :id AND p.availability = :bool")
     List<PickupSchedule> findByAvailabilityByPickupPointId(boolean bool, long id);
+
+    List<PickupSchedule> findByAvailabilityAndPickupPoint(Boolean availability, PickupPoint pickupPoint);
 
 
 }

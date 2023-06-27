@@ -91,7 +91,14 @@ public class PickupScheduleService {
     }
 
     public List<PickupSchedule> getNonAvailablePickupSchedulesByPickupPointId(long id) throws ResourceNotFoundException {
-        return pickupScheduleRepository.findByAvailabilityByPickupPointId(false, id);
+
+        Optional<PickupPoint> pickupoint = pickupPointRepository.findById(id);
+
+        if (pickupoint.isEmpty()){
+            throw new ResourceNotFoundException("PickupPoint not found");
+        }
+
+        return pickupScheduleRepository.findByAvailabilityAndPickupPoint(false, pickupoint.get());
     }
 
     public PickupSchedule updatePickupSchedule(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
