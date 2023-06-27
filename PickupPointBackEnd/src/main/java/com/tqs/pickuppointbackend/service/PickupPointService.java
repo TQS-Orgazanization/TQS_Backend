@@ -2,7 +2,9 @@ package com.tqs.pickuppointbackend.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import com.tqs.pickuppointbackend.controller.model.UpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +37,11 @@ public class PickupPointService {
     }
 
     public PickupPoint getPickupPointByUserId(long id) throws ResourceNotFoundException {
-        return pickupPointRepository.findByUserId(id);
+        PickupPoint pick = pickupPointRepository.findByUserId(id);
+        if (pick != null) {
+            return pick;
+        }
+        throw new ResourceNotFoundException("This pickup doesn't exist");
     }
 
     public List<PickupPoint> getAvailablePickupPoints() throws ResourceNotFoundException {
@@ -54,18 +60,21 @@ public class PickupPointService {
         return pickupPointRepository.save(pickupPoint);
     }
 
-    public PickupPoint updatePickupPoint(PickupPointDTO pickupPointDTO) throws ResourceNotFoundException {
+    public PickupPoint updatePickupPoint(Long id, UpdateRequest request) throws ResourceNotFoundException {
 
         PickupPoint pickupPoint = utils.pickupPointFromDTO(pickupPointDTO);
         PickupPoint existingPickupPoint = pickupPointRepository.findById(pickupPoint.getPoint_id()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
         
         if (existingPickupPoint == null){ return null; }
 
+        existingPickupPoint.setAvailability(request.isAvailability());
+
+        /*
         existingPickupPoint.setName(pickupPoint.getName());
         existingPickupPoint.setAddress(pickupPoint.getAddress());
         existingPickupPoint.setContactInfo(pickupPoint.getContactInfo());
         existingPickupPoint.setAvailability(pickupPoint.isAvailability());
-        existingPickupPoint.setUser_id(pickupPoint.getUser_id());
+        existingPickupPoint.setUser_id(pickupPoint.getUser_id());*/
 
         NotificationDTO notificationDTO = new NotificationDTO();
         notificationDTO.setMessage("ACP accepted");
@@ -73,7 +82,7 @@ public class PickupPointService {
 
         notificationService.addNotification(notificationDTO);
 
-        
+     
         return pickupPointRepository.save(existingPickupPoint);
     }
 

@@ -1,6 +1,7 @@
 package com.tqs.pickuppointbackend.model;
 
 import com.tqs.pickuppointbackend.constants.UserType;
+import com.tqs.pickuppointbackend.controller.model.UserResponse;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -60,4 +61,15 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserSession> userSessions;
+
+    public UserResponse toResponse(){
+        return UserResponse.builder()
+                .userId(this.userId)
+                .name(this.name)
+                .email(this.email)
+                .phone(this.phone)
+                .address(this.address)
+                .userType(this.userType)
+                .build();
+    }
 }

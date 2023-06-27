@@ -2,10 +2,7 @@ package com.tqs.pickuppointbackend.model.Dto;
 
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ import com.tqs.pickuppointbackend.model.PickupPoint;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class PickupPointDTO {
 
     private Long point_id;

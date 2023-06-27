@@ -3,7 +3,8 @@ package com.tqs.pickuppointbackend.constants;
 public enum UserType {
     ADMIN("ADMIN"),
     ACP("ACP"),
-    CLIENT("CLIENT");
+    CLIENT("CLIENT"),
+    TEST("TEST");
 
     private String userType;
 

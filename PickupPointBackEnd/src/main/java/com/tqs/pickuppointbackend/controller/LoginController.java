@@ -1,6 +1,8 @@
 package com.tqs.pickuppointbackend.controller;
 
+import com.tqs.pickuppointbackend.controller.model.LoginRequest;
 import com.tqs.pickuppointbackend.controller.model.LoginResponse;
+import com.tqs.pickuppointbackend.controller.model.UserResponse;
 import com.tqs.pickuppointbackend.exceptions.ResourceNotFoundException;
 import com.tqs.pickuppointbackend.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import com.tqs.pickuppointbackend.model.User;
 import com.tqs.pickuppointbackend.repository.UserRepository;
 
 @RestController
-@RequestMapping("/api/login")
+@RequestMapping("/api")
 public class LoginController {
 
     private final UserRepository userRepository;
@@ -26,16 +28,29 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping        
-    public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) throws ResourceNotFoundException {
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) throws ResourceNotFoundException {
         // Check if user exists with the given email
 
-        LoginResponse token = authenticationService.login(email, password);
+        LoginResponse token = authenticationService.login(request.getEmail(), request.getPassword());
 
         if (token != null){
-            return ResponseEntity.status(HttpStatus.OK).body(token.getAccessToken());
+            return ResponseEntity.status(HttpStatus.OK).body(token);
         }
         throw new ResourceNotFoundException("Invalid email or password");
+        // Successful login
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<UserResponse> getUserByToken(@RequestHeader("Authorization") String token) throws ResourceNotFoundException {
+        // Check if user exists with the given email
+
+        UserResponse user = authenticationService.getUserByToken(token);
+
+        if (token != null){
+            return ResponseEntity.status(HttpStatus.OK).body(user);
+        }
+        throw new ResourceNotFoundException("Invalid email or ");
         // Successful login
     }
 }

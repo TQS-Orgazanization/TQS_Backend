@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.tqs.pickuppointbackend.constants.Constants.TEST_TOKEN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -33,7 +34,7 @@ public class PickupScheduleControllerTest {
     }
 
     @Test
-    public void testGetPickupSchedules() {
+    public void testGetPickupSchedules() throws ResourceNotFoundException {
         PickupSchedule pickupSchedule1 = new PickupSchedule();
         pickupSchedule1.setId(1L);
 
@@ -44,7 +45,7 @@ public class PickupScheduleControllerTest {
 
         when(pickupScheduleService.getPickupSchedules()).thenReturn(pickupSchedules);
 
-        ResponseEntity<List<PickupSchedule>> response = pickupScheduleController.getPickupSchedules();
+        ResponseEntity<List<PickupSchedule>> response = pickupScheduleController.getPickupSchedules(TEST_TOKEN);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(pickupSchedules, response.getBody());
@@ -58,7 +59,7 @@ public class PickupScheduleControllerTest {
 
         when(pickupScheduleService.getPickupScheduleById(pickupScheduleId)).thenReturn(pickupSchedule);
 
-        ResponseEntity<PickupSchedule> response = pickupScheduleController.getPickupScheduleById(pickupScheduleId);
+        ResponseEntity<PickupSchedule> response = pickupScheduleController.getPickupScheduleById(pickupScheduleId, TEST_TOKEN);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(pickupSchedule, response.getBody());
@@ -73,7 +74,7 @@ public class PickupScheduleControllerTest {
 
         when(pickupScheduleService.addPickupSchedule(pickupScheduleDTO)).thenReturn(addedPickupSchedule);
 
-        ResponseEntity<PickupSchedule> response = pickupScheduleController.addPickupSchedule(pickupScheduleDTO);
+        ResponseEntity<PickupSchedule> response = pickupScheduleController.addPickupSchedule(pickupScheduleDTO, TEST_TOKEN);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(addedPickupSchedule, response.getBody());
@@ -87,7 +88,7 @@ public class PickupScheduleControllerTest {
 
         when(pickupScheduleService.deletePickupScheduleById(pickupScheduleId)).thenReturn(deletedPickupSchedule);
 
-        ResponseEntity<PickupSchedule> response = pickupScheduleController.deletePickupScheduleById(pickupScheduleId);
+        ResponseEntity<PickupSchedule> response = pickupScheduleController.deletePickupScheduleById(pickupScheduleId, TEST_TOKEN);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(deletedPickupSchedule, response.getBody());
