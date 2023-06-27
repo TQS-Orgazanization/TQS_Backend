@@ -1,22 +1,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Backend-DevOps
-  labels:
-    app: Backend-DevOps
+  name: tqs-backend
   namespace: tqs-services
+  labels:
+    run: tqs-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Backend-DevOps
+      run: tqs-backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: Backend-DevOps
+        run: tqs-backend
     spec:
       containers:
-        - name: Backend-DevOps
-          image: tqscontainer2.azurecr.io/tqs-backendd:latest
+        - name: tqs-backend
+          image: tqscontainer2.azurecr.io/tqs-backend:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: log
+              mountPath: /var/log
           ports:
             - containerPort: 80
+          env:
+            - name: DB_URL
+              value: "jdbc:mysql://mysql-service:3306/pickuppoint"
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              value: MysqlPassword12345
+          resources:
+            requests:
+              memory: 512Mi
+            limits:
+              memory: 1Gi
+      volumes:
+        - name: log
+          emptyDir: {}
