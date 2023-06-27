@@ -1,46 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tqs-backend
-  namespace: tqs-services
+  name: testt
   labels:
-    run: tqs-backend
+    app: testt
+  namespace: tqs-services
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run: tqs-backend
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
+      app: testt
   template:
     metadata:
       labels:
-        run: tqs-backend
+        app: testt
     spec:
       containers:
-        - name: tqs-backend
-          image: tqscontainer2.azurecr.io/tqs-backend:latest
-          imagePullPolicy: Always
-          volumeMounts:
-            - name: log
-              mountPath: /var/log
+        - name: testt
+          image: acrworkflow1687825403901.azurecr.io/image-workflow-1687825403901:latest
           ports:
             - containerPort: 80
-          env:
-            - name: DB_URL
-              value: "jdbc:mysql://mysql-service:3306/pickuppoint"
-            - name: DB_USER
-              value: root
-            - name: DB_PASSWORD
-              value: MysqlPassword12345
-          resources:
-            requests:
-              memory: 512Mi
-            limits:
-              memory: 1Gi
-      volumes:
-        - name: log
-          emptyDir: {}
