@@ -26,7 +26,7 @@ public class PopulateService {
     PickupScheduleRepository pickupScheduleRepository;
 
 
-
+    /*
     public void populateDatabase() {
         // Create sample PickupPoints
         PickupPoint pickupPoint1 = new PickupPoint();
@@ -93,5 +93,5 @@ public class PopulateService {
         pickupSchedule1.setCode(00000L);
         pickupScheduleRepository.save(pickupSchedule2);
 
-    }
+    }*/
 }

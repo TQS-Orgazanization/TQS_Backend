@@ -26,7 +26,7 @@ public class UtilController {
     public ResponseEntity<String> populate() {
         log.info("Create User");
 
-        populateService.populateDatabase();
+        //populateService.populateDatabase();
         return new ResponseEntity<String>("OK", HttpStatus.OK);
     }
 

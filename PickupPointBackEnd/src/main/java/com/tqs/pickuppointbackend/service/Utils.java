@@ -60,9 +60,8 @@ public class Utils {
     public PickupSchedule pickupScheduleFromDTO(PickupScheduleDTO pickupScheduleDTO) throws ResourceNotFoundException {
 
         PickupSchedule pickupSchedule = new PickupSchedule();
-        pickupSchedule.setCode(pickupScheduleDTO.getCode());
-        pickupSchedule.setAvailability(pickupScheduleDTO.getAvailability());
-        System.out.println(pickupScheduleDTO.getId());
+        //pickupSchedule.setCode(pickupScheduleDTO.getCode());
+        //pickupSchedule.setAvailability(pickupScheduleDTO.getAvailability());
 
         PickupPoint pickupPoint = pickupPointRepository.findById(pickupScheduleDTO.getPickupPointId()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
         User user = userRepository.findById(pickupScheduleDTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User Not Found!"));

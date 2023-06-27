@@ -2,8 +2,7 @@ package com.tqs.pickuppointbackend.model;
 
 import com.tqs.pickuppointbackend.constants.UserType;
 import com.tqs.pickuppointbackend.controller.model.UserResponse;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,9 +10,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user")
 public class User {
     @Id
