@@ -19,10 +19,10 @@ import com.tqs.pickuppointbackend.repository.PickupPointRepository;
 public class PickupPointService {
     
     @Autowired
-    PickupPointRepository pickupPointRepository;
+    private PickupPointRepository pickupPointRepository;
 
     @Autowired
-    NotificationService notificationService;
+    private NotificationService notificationService;
 
     Utils utils = new Utils();
 
@@ -62,11 +62,14 @@ public class PickupPointService {
 
     public PickupPoint updatePickupPoint(Long id, UpdateRequest request) throws ResourceNotFoundException {
 
-        PickupPoint existingPickupPoint = pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
-        
-        if (existingPickupPoint == null){ return null; }
+        //PickupPoint existingPickupPoint = pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
 
-        existingPickupPoint.setAvailability(request.isAvailability());
+        Optional<PickupPoint> pickupPoint = pickupPointRepository.findById(id);
+
+        if (pickupPoint.isEmpty()){ throw new ResourceNotFoundException("PickupPoint not found"); }
+
+        PickupPoint pick = pickupPoint.get();
+        pick.setAvailability(request.isAvailability());
 
         /*
         existingPickupPoint.setName(pickupPoint.getName());
@@ -77,12 +80,10 @@ public class PickupPointService {
 
         NotificationDTO notificationDTO = new NotificationDTO();
         notificationDTO.setMessage("ACP accepted");
-        notificationDTO.setUserId(existingPickupPoint.getUser_id());
+        notificationDTO.setUserId(pick.getUser_id());
 
         notificationService.addNotification(notificationDTO);
-
-     
-        return pickupPointRepository.save(existingPickupPoint);
+        return pickupPointRepository.save(pick);
     }
 
     public PickupPoint deletePickupPointById(long id) throws ResourceNotFoundException {

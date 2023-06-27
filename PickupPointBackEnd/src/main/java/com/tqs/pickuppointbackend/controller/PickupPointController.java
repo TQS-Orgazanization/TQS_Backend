@@ -24,7 +24,7 @@ import com.tqs.pickuppointbackend.service.PickupPointService;
 public class PickupPointController {
 
     @Autowired
-    PickupPointService pickupPointService;
+    private PickupPointService pickupPointService;
 
     @Autowired
     private AuthenticationService authenticationService;
