@@ -1,13 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: Backend-DevOps
+  labels:
+    run: tqs-backend
+  name: tqs-backend
   namespace: tqs-services
 spec:
-  type: LoadBalancer
-  selector:
-    app: Backend-DevOps
+  type: NodePort
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: tqs-backend
