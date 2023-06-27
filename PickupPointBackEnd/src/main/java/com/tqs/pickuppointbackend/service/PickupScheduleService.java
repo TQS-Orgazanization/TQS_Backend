@@ -66,7 +66,7 @@ public class PickupScheduleService {
             throw new ResourceNotFoundException("PickupPoint or User not found");
         }
 
-        PickupSchedule pickSchedule = PickupSchedule.builder().pickupPoint(pickup.get()).user(user.get()).build();
+        PickupSchedule pickSchedule = PickupSchedule.builder().pickupPoint(pickup.get()).user(user.get()).availability(true).build();
 
         log.info("End:" + pickSchedule);
         return pickupScheduleRepository.save(pickSchedule);
