@@ -62,8 +62,7 @@ public class PickupPointService {
 
     public PickupPoint updatePickupPoint(Long id, UpdateRequest request) throws ResourceNotFoundException {
 
-        PickupPoint pickupPoint = utils.pickupPointFromDTO(pickupPointDTO);
-        PickupPoint existingPickupPoint = pickupPointRepository.findById(pickupPoint.getPoint_id()).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
+        PickupPoint existingPickupPoint = pickupPointRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pickup Point Not Found!"));
         
         if (existingPickupPoint == null){ return null; }
 
